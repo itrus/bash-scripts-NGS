@@ -1,0 +1,1003 @@
+user@localhost:~/Desktop/now3> ./install-ivar.sh 
+--2022-02-09 10:24:26--  https://github.com/andersen-lab/ivar/archive/refs/heads/master.zip
+Resolving github.com (github.com)... 140.82.121.4
+Connecting to github.com (github.com)|140.82.121.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/andersen-lab/ivar/zip/refs/heads/master [following]
+--2022-02-09 10:24:26--  https://codeload.github.com/andersen-lab/ivar/zip/refs/heads/master
+Resolving codeload.github.com (codeload.github.com)... 140.82.121.10
+Connecting to codeload.github.com (codeload.github.com)|140.82.121.10|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 941155 (919K) [application/zip]
+Saving to: ‘master.zip’
+
+master.zip          100%[===================>] 919.10K  5.74MB/s    in 0.2s    
+
+2022-02-09 10:24:27 (5.74 MB/s) - ‘master.zip’ saved [941155/941155]
+
+Archive:  ./master.zip
+ce1490a70806ea33b225e9cb1b89f15cf0fa0271
+   creating: ivar-master/
+   creating: ivar-master/.github/
+   creating: ivar-master/.github/ISSUE_TEMPLATE/
+  inflating: ivar-master/.github/ISSUE_TEMPLATE/bug_report.md  
+  inflating: ivar-master/.github/ISSUE_TEMPLATE/feature_request.md  
+   creating: ivar-master/.github/workflows/
+  inflating: ivar-master/.github/workflows/ccpp.yml  
+  inflating: ivar-master/.gitignore  
+ extracting: ivar-master/AUTHORS     
+ extracting: ivar-master/ChangeLog   
+  inflating: ivar-master/Dockerfile  
+  inflating: ivar-master/Doxyfile    
+  inflating: ivar-master/LICENSE     
+  inflating: ivar-master/Makefile.am  
+ extracting: ivar-master/NEWS        
+  inflating: ivar-master/README      
+  inflating: ivar-master/README.md   
+ extracting: ivar-master/autogen.sh  
+  inflating: ivar-master/call_variants.sh  
+  inflating: ivar-master/config.h.in  
+  inflating: ivar-master/configure.ac  
+   creating: ivar-master/data/
+   creating: ivar-master/data/db/
+  inflating: ivar-master/data/db/test_ref.fa  
+  inflating: ivar-master/data/pair_info_2.tsv  
+  inflating: ivar-master/data/pair_information.tsv  
+   creating: ivar-master/data/primer_only/
+  inflating: ivar-master/data/primer_only/primer_edge_cases.bam  
+  inflating: ivar-master/data/primer_only/primer_edge_cases.bam.bai  
+  inflating: ivar-master/data/test.bed  
+  inflating: ivar-master/data/test.filtered.tsv  
+ extracting: ivar-master/data/test.gap.sorted.bam  
+  inflating: ivar-master/data/test.gap.sorted.bam.bai  
+  inflating: ivar-master/data/test.gap.sorted.mpileup  
+  inflating: ivar-master/data/test.gff  
+ extracting: ivar-master/data/test.indel.mpileup  
+ extracting: ivar-master/data/test.sim.merged.sorted.bam  
+  inflating: ivar-master/data/test.sim.merged.sorted.bam.bai  
+ extracting: ivar-master/data/test.sorted.bam  
+  inflating: ivar-master/data/test.sorted.bam.bai  
+ extracting: ivar-master/data/test.trimmed.sorted.bam  
+ extracting: ivar-master/data/test.unmapped.sorted.bam  
+ extracting: ivar-master/data/test_amplicon.sorted.bam  
+  inflating: ivar-master/data/test_isize.bed  
+ extracting: ivar-master/data/test_isize.sorted.bam  
+  inflating: ivar-master/data/test_merged.bed  
+   creating: ivar-master/docs/
+  inflating: ivar-master/docs/COOKBOOK.md  
+  inflating: ivar-master/docs/INSTALLATION.md  
+  inflating: ivar-master/docs/MANUAL.md  
+  inflating: ivar-master/docs/README.md  
+  inflating: ivar-master/docs/customdoxygen.css  
+  inflating: ivar-master/docs/footer.html  
+  inflating: ivar-master/docs/header.html  
+   creating: ivar-master/docs/html/
+  inflating: ivar-master/docs/html/_c_o_o_k_b_o_o_k_8md_source.html  
+  inflating: ivar-master/docs/html/_i_n_s_t_a_l_l_a_t_i_o_n_8md_source.html  
+  inflating: ivar-master/docs/html/_m_a_n_u_a_l_8md_source.html  
+  inflating: ivar-master/docs/html/_r_e_a_d_m_e_8md_source.html  
+  inflating: ivar-master/docs/html/_readme_8md_source.html  
+  inflating: ivar-master/docs/html/alignment_8cpp_source.html  
+  inflating: ivar-master/docs/html/alignment_8h_source.html  
+  inflating: ivar-master/docs/html/allele__functions_8cpp_source.html  
+  inflating: ivar-master/docs/html/allele__functions_8h_source.html  
+  inflating: ivar-master/docs/html/annotated.html  
+  inflating: ivar-master/docs/html/bam__to__bed_8cpp_source.html  
+ extracting: ivar-master/docs/html/bc_s.png  
+  inflating: ivar-master/docs/html/bdwn.png  
+  inflating: ivar-master/docs/html/call__consensus_8cpp_source.html  
+  inflating: ivar-master/docs/html/call__consensus__pileup_8cpp_source.html  
+  inflating: ivar-master/docs/html/call__consensus__pileup_8h_source.html  
+  inflating: ivar-master/docs/html/call__variants_8cpp_source.html  
+  inflating: ivar-master/docs/html/call__variants_8h_source.html  
+  inflating: ivar-master/docs/html/classes.html  
+  inflating: ivar-master/docs/html/classprimer-members.html  
+  inflating: ivar-master/docs/html/classprimer.html  
+  inflating: ivar-master/docs/html/classsuffix__node-members.html  
+  inflating: ivar-master/docs/html/classsuffix__node.html  
+  inflating: ivar-master/docs/html/classsuffix__node__coll__graph.dot  
+ extracting: ivar-master/docs/html/classsuffix__node__coll__graph.md5  
+  inflating: ivar-master/docs/html/closed.png  
+  inflating: ivar-master/docs/html/cookbookpage.html  
+  inflating: ivar-master/docs/html/customdoxygen.css  
+  inflating: ivar-master/docs/html/dir_68267d1309a1af8e8297ef4c3efbcdba.html  
+ extracting: ivar-master/docs/html/doc.png  
+  inflating: ivar-master/docs/html/doxygen.css  
+ extracting: ivar-master/docs/html/doxygen.png  
+  inflating: ivar-master/docs/html/dynsections.js  
+  inflating: ivar-master/docs/html/files.html  
+ extracting: ivar-master/docs/html/folderclosed.png  
+ extracting: ivar-master/docs/html/folderopen.png  
+  inflating: ivar-master/docs/html/get__common__consensus_8cpp_source.html  
+  inflating: ivar-master/docs/html/get__masked__amplicons_8cpp_source.html  
+  inflating: ivar-master/docs/html/get__masked__amplicons_8h_source.html  
+  inflating: ivar-master/docs/html/globals.html  
+  inflating: ivar-master/docs/html/globals_func.html  
+  inflating: ivar-master/docs/html/graph_legend.dot  
+  inflating: ivar-master/docs/html/graph_legend.html  
+ extracting: ivar-master/docs/html/graph_legend.md5  
+  inflating: ivar-master/docs/html/index.html  
+  inflating: ivar-master/docs/html/installpage.html  
+  inflating: ivar-master/docs/html/ivar_8cpp.html  
+  inflating: ivar-master/docs/html/ivar_8cpp__incl.dot  
+ extracting: ivar-master/docs/html/ivar_8cpp__incl.md5  
+  inflating: ivar-master/docs/html/ivar_8cpp_source.html  
+  inflating: ivar-master/docs/html/jquery.js  
+  inflating: ivar-master/docs/html/manualpage.html  
+  inflating: ivar-master/docs/html/md__r_e_a_d_m_e.html  
+  inflating: ivar-master/docs/html/md_docs__r_e_a_d_m_e.html  
+  inflating: ivar-master/docs/html/menu.js  
+  inflating: ivar-master/docs/html/menudata.js  
+ extracting: ivar-master/docs/html/nav_f.png  
+  inflating: ivar-master/docs/html/nav_g.png  
+  inflating: ivar-master/docs/html/nav_h.png  
+  inflating: ivar-master/docs/html/open.png  
+  inflating: ivar-master/docs/html/pages.html  
+  inflating: ivar-master/docs/html/primer__bed_8cpp_source.html  
+  inflating: ivar-master/docs/html/primer__bed_8h_source.html  
+  inflating: ivar-master/docs/html/remove__reads__from__amplicon_8cpp_source.html  
+  inflating: ivar-master/docs/html/remove__reads__from__amplicon_8h_source.html  
+   creating: ivar-master/docs/html/search/
+  inflating: ivar-master/docs/html/search/all_0.html  
+  inflating: ivar-master/docs/html/search/all_0.js  
+  inflating: ivar-master/docs/html/search/all_1.html  
+  inflating: ivar-master/docs/html/search/all_1.js  
+  inflating: ivar-master/docs/html/search/all_2.html  
+  inflating: ivar-master/docs/html/search/all_2.js  
+  inflating: ivar-master/docs/html/search/all_3.html  
+  inflating: ivar-master/docs/html/search/all_3.js  
+  inflating: ivar-master/docs/html/search/all_4.html  
+  inflating: ivar-master/docs/html/search/all_4.js  
+  inflating: ivar-master/docs/html/search/all_5.html  
+  inflating: ivar-master/docs/html/search/all_5.js  
+  inflating: ivar-master/docs/html/search/all_6.html  
+  inflating: ivar-master/docs/html/search/all_6.js  
+  inflating: ivar-master/docs/html/search/all_7.html  
+  inflating: ivar-master/docs/html/search/all_7.js  
+  inflating: ivar-master/docs/html/search/classes_0.html  
+  inflating: ivar-master/docs/html/search/classes_0.js  
+  inflating: ivar-master/docs/html/search/classes_1.html  
+  inflating: ivar-master/docs/html/search/classes_1.js  
+  inflating: ivar-master/docs/html/search/classes_2.html  
+  inflating: ivar-master/docs/html/search/classes_2.js  
+  inflating: ivar-master/docs/html/search/classes_3.html  
+  inflating: ivar-master/docs/html/search/classes_3.js  
+  inflating: ivar-master/docs/html/search/classes_4.html  
+  inflating: ivar-master/docs/html/search/classes_4.js  
+  inflating: ivar-master/docs/html/search/classes_5.html  
+  inflating: ivar-master/docs/html/search/classes_5.js  
+ extracting: ivar-master/docs/html/search/close.png  
+  inflating: ivar-master/docs/html/search/files_0.html  
+  inflating: ivar-master/docs/html/search/files_0.js  
+  inflating: ivar-master/docs/html/search/functions_0.html  
+  inflating: ivar-master/docs/html/search/functions_0.js  
+ extracting: ivar-master/docs/html/search/mag_sel.png  
+  inflating: ivar-master/docs/html/search/nomatches.html  
+  inflating: ivar-master/docs/html/search/pages_0.html  
+  inflating: ivar-master/docs/html/search/pages_0.js  
+  inflating: ivar-master/docs/html/search/pages_1.html  
+  inflating: ivar-master/docs/html/search/pages_1.js  
+  inflating: ivar-master/docs/html/search/pages_2.html  
+  inflating: ivar-master/docs/html/search/pages_2.js  
+  inflating: ivar-master/docs/html/search/pages_3.html  
+  inflating: ivar-master/docs/html/search/pages_3.js  
+  inflating: ivar-master/docs/html/search/search.css  
+  inflating: ivar-master/docs/html/search/search.js  
+ extracting: ivar-master/docs/html/search/search_l.png  
+  inflating: ivar-master/docs/html/search/search_m.png  
+ extracting: ivar-master/docs/html/search/search_r.png  
+  inflating: ivar-master/docs/html/search/searchdata.js  
+  inflating: ivar-master/docs/html/splitbar.png  
+  inflating: ivar-master/docs/html/structallele-members.html  
+  inflating: ivar-master/docs/html/structallele.html  
+  inflating: ivar-master/docs/html/structargs__t-members.html  
+  inflating: ivar-master/docs/html/structargs__t.html  
+  inflating: ivar-master/docs/html/structcigar__-members.html  
+  inflating: ivar-master/docs/html/structcigar__.html  
+  inflating: ivar-master/docs/html/structmaj-members.html  
+  inflating: ivar-master/docs/html/structmaj.html  
+  inflating: ivar-master/docs/html/structret__t-members.html  
+  inflating: ivar-master/docs/html/structret__t.html  
+  inflating: ivar-master/docs/html/suffix__tree_8cpp_source.html  
+  inflating: ivar-master/docs/html/suffix__tree_8h_source.html  
+ extracting: ivar-master/docs/html/sync_off.png  
+ extracting: ivar-master/docs/html/sync_on.png  
+ extracting: ivar-master/docs/html/tab_a.png  
+ extracting: ivar-master/docs/html/tab_b.png  
+ extracting: ivar-master/docs/html/tab_h.png  
+ extracting: ivar-master/docs/html/tab_s.png  
+  inflating: ivar-master/docs/html/tabs.css  
+  inflating: ivar-master/docs/html/test_8cpp_source.html  
+  inflating: ivar-master/docs/html/trim__primer__quality_8cpp_source.html  
+  inflating: ivar-master/docs/html/trim__primer__quality_8h_source.html  
+   creating: ivar-master/docs/latex/
+  inflating: ivar-master/docs/latex/annotated.tex  
+  inflating: ivar-master/docs/latex/classprimer.tex  
+  inflating: ivar-master/docs/latex/classsuffix__node.tex  
+  inflating: ivar-master/docs/latex/classsuffix__node.tex.tmp  
+  inflating: ivar-master/docs/latex/classsuffix__node__coll__graph.dot  
+ extracting: ivar-master/docs/latex/classsuffix__node__coll__graph.md5  
+  inflating: ivar-master/docs/latex/cookbookpage.tex  
+  inflating: ivar-master/docs/latex/doxygen.sty  
+  inflating: ivar-master/docs/latex/files.tex  
+  inflating: ivar-master/docs/latex/index.tex  
+  inflating: ivar-master/docs/latex/installpage.tex  
+  inflating: ivar-master/docs/latex/ivar_8cpp.tex  
+  inflating: ivar-master/docs/latex/ivar_8cpp.tex.tmp  
+  inflating: ivar-master/docs/latex/ivar_8cpp__incl.dot  
+ extracting: ivar-master/docs/latex/ivar_8cpp__incl.md5  
+  inflating: ivar-master/docs/latex/manualpage.tex  
+ extracting: ivar-master/docs/latex/md__r_e_a_d_m_e.tex  
+  inflating: ivar-master/docs/latex/md_docs__r_e_a_d_m_e.tex  
+  inflating: ivar-master/docs/latex/refman.tex  
+  inflating: ivar-master/docs/latex/structallele.tex  
+  inflating: ivar-master/docs/latex/structargs__t.tex  
+  inflating: ivar-master/docs/latex/structcigar__.tex  
+  inflating: ivar-master/docs/latex/structmaj.tex  
+  inflating: ivar-master/docs/latex/structret__t.tex  
+   creating: ivar-master/docs/man/
+   creating: ivar-master/docs/man/man3/
+  inflating: ivar-master/docs/man/man3/allele.3  
+  inflating: ivar-master/docs/man/man3/args_t.3  
+  inflating: ivar-master/docs/man/man3/cigar_.3  
+  inflating: ivar-master/docs/man/man3/cookbookpage.3  
+  inflating: ivar-master/docs/man/man3/installpage.3  
+  inflating: ivar-master/docs/man/man3/ivar.cpp.3  
+  inflating: ivar-master/docs/man/man3/maj.3  
+  inflating: ivar-master/docs/man/man3/manualpage.3  
+  inflating: ivar-master/docs/man/man3/md__r_e_a_d_m_e.3  
+  inflating: ivar-master/docs/man/man3/md_docs__r_e_a_d_m_e.3  
+  inflating: ivar-master/docs/man/man3/primer.3  
+  inflating: ivar-master/docs/man/man3/ret_t.3  
+  inflating: ivar-master/docs/man/man3/suffix_node.3  
+   creating: ivar-master/pipeline/
+  inflating: ivar-master/pipeline/Snakefile  
+  inflating: ivar-master/pipeline/dag.svg  
+  inflating: ivar-master/pipeline/pipeline.dot  
+  inflating: ivar-master/pipeline/pipeline.png  
+   creating: ivar-master/pipeline_consensus/
+  inflating: ivar-master/pipeline_consensus/Snakefile  
+  inflating: ivar-master/pipeline_consensus/config.json  
+  inflating: ivar-master/pipeline_consensus/example_samples.tsv  
+   creating: ivar-master/pipeline_field/
+  inflating: ivar-master/pipeline_field/Snakefile  
+  inflating: ivar-master/pipeline_field/dag.svg  
+  inflating: ivar-master/pipeline_field/pipeline_field.dot  
+  inflating: ivar-master/pipeline_field/pipeline_field.png  
+   creating: ivar-master/scripts/
+ extracting: ivar-master/scripts/Makefile.am  
+  inflating: ivar-master/scripts/get_common_variants.sh  
+  inflating: ivar-master/scripts/primer_bam_to_bed.sh  
+   creating: ivar-master/src/
+  inflating: ivar-master/src/Makefile.am  
+  inflating: ivar-master/src/alignment.cpp  
+  inflating: ivar-master/src/alignment.h  
+  inflating: ivar-master/src/allele_functions.cpp  
+  inflating: ivar-master/src/allele_functions.h  
+ extracting: ivar-master/src/bam_to_bed.cpp  
+  inflating: ivar-master/src/call_consensus.cpp  
+  inflating: ivar-master/src/call_consensus_pileup.cpp  
+  inflating: ivar-master/src/call_consensus_pileup.h  
+  inflating: ivar-master/src/call_variants.cpp  
+  inflating: ivar-master/src/call_variants.h  
+  inflating: ivar-master/src/get_common_variants.cpp  
+  inflating: ivar-master/src/get_common_variants.h  
+  inflating: ivar-master/src/get_masked_amplicons.cpp  
+  inflating: ivar-master/src/get_masked_amplicons.h  
+  inflating: ivar-master/src/interval_tree.cpp  
+  inflating: ivar-master/src/interval_tree.h  
+  inflating: ivar-master/src/ivar.cpp  
+  inflating: ivar-master/src/parse_gff.cpp  
+  inflating: ivar-master/src/parse_gff.h  
+  inflating: ivar-master/src/primer_bed.cpp  
+  inflating: ivar-master/src/primer_bed.h  
+  inflating: ivar-master/src/ref_seq.cpp  
+  inflating: ivar-master/src/ref_seq.h  
+  inflating: ivar-master/src/remove_reads_from_amplicon.cpp  
+  inflating: ivar-master/src/remove_reads_from_amplicon.h  
+  inflating: ivar-master/src/suffix_tree.cpp  
+  inflating: ivar-master/src/suffix_tree.h  
+  inflating: ivar-master/src/trim_primer_quality.cpp  
+  inflating: ivar-master/src/trim_primer_quality.h  
+  inflating: ivar-master/src/vcf_writer.cpp  
+  inflating: ivar-master/src/vcf_writer.h  
+   creating: ivar-master/tests/
+  inflating: ivar-master/tests/Makefile.am  
+  inflating: ivar-master/tests/check_quality_trim.cpp  
+  inflating: ivar-master/tests/test_allele_depth.cpp  
+  inflating: ivar-master/tests/test_amplicon_search.cpp  
+  inflating: ivar-master/tests/test_call_consensus_from_plup.cpp  
+  inflating: ivar-master/tests/test_common_variants.cpp  
+  inflating: ivar-master/tests/test_consensus_min_depth.cpp  
+  inflating: ivar-master/tests/test_consensus_seq_id.cpp  
+  inflating: ivar-master/tests/test_consensus_threshold.cpp  
+  inflating: ivar-master/tests/test_getmasked.cpp  
+  inflating: ivar-master/tests/test_interval_tree.cpp  
+  inflating: ivar-master/tests/test_isize_trim.cpp  
+  inflating: ivar-master/tests/test_primer_bed.cpp  
+  inflating: ivar-master/tests/test_primer_trim.cpp  
+  inflating: ivar-master/tests/test_primer_trim_edge_cases.cpp  
+  inflating: ivar-master/tests/test_ref_seq.cpp  
+  inflating: ivar-master/tests/test_removereads.cpp  
+  inflating: ivar-master/tests/test_trim.cpp  
+  inflating: ivar-master/tests/test_unpaired_trim.cpp  
+  inflating: ivar-master/tests/test_variants.cpp  
+configure.ac:12: installing './compile'
+configure.ac:6: installing './install-sh'
+configure.ac:6: installing './missing'
+src/Makefile.am: installing './depcomp'
+parallel-tests: installing './test-driver'
+configure: loading site script /usr/share/site/x86_64-unknown-linux-gnu
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking for gawk... (cached) gawk
+checking for g++... g++
+checking whether the C++ compiler works... yes
+checking for C++ compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for style of include used by make... GNU
+checking dependency style of g++... gcc3
+checking for gcc... gcc
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for main in -lhts... no
+checking for main in -lpthread... no
+checking for main in -lz... no
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... no
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for unistd.h... (cached) yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for inline... inline
+checking for int16_t... yes
+checking for int32_t... yes
+checking for int8_t... yes
+checking for uint16_t... yes
+checking for uint32_t... yes
+checking for uint8_t... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... no
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... no
+checking for memmove... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating tests/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+make  all-recursive
+make[1]: Entering directory '/home/user/Desktop/now3/ivar-master'
+Making all in src
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master/src'
+depbase=`echo ivar.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT ivar.o -MD -MP -MF $depbase.Tpo -c -o ivar.o ivar.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ivar.o' '-MD' '-MP' '-MF' '.deps/ivar.Tpo' '-c' '-o' 'ivar.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD ivar.d -MF .deps/ivar.Tpo -MP -MT ivar.o -D_GNU_SOURCE -D HAVE_CONFIG_H ivar.cpp -quiet -dumpbase ivar.cpp -mtune=generic -march=x86-64 -auxbase-strip ivar.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccwvcnbq.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ivar.o' '-MD' '-MP' '-MF' '.deps/ivar.Tpo' '-c' '-o' 'ivar.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o ivar.o /tmp/ccwvcnbq.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ivar.o' '-MD' '-MP' '-MF' '.deps/ivar.Tpo' '-c' '-o' 'ivar.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo call_consensus_pileup.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT call_consensus_pileup.o -MD -MP -MF $depbase.Tpo -c -o call_consensus_pileup.o call_consensus_pileup.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_consensus_pileup.o' '-MD' '-MP' '-MF' '.deps/call_consensus_pileup.Tpo' '-c' '-o' 'call_consensus_pileup.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD call_consensus_pileup.d -MF .deps/call_consensus_pileup.Tpo -MP -MT call_consensus_pileup.o -D_GNU_SOURCE -D HAVE_CONFIG_H call_consensus_pileup.cpp -quiet -dumpbase call_consensus_pileup.cpp -mtune=generic -march=x86-64 -auxbase-strip call_consensus_pileup.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/cc2vnIm3.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_consensus_pileup.o' '-MD' '-MP' '-MF' '.deps/call_consensus_pileup.Tpo' '-c' '-o' 'call_consensus_pileup.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o call_consensus_pileup.o /tmp/cc2vnIm3.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_consensus_pileup.o' '-MD' '-MP' '-MF' '.deps/call_consensus_pileup.Tpo' '-c' '-o' 'call_consensus_pileup.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo alignment.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT alignment.o -MD -MP -MF $depbase.Tpo -c -o alignment.o alignment.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'alignment.o' '-MD' '-MP' '-MF' '.deps/alignment.Tpo' '-c' '-o' 'alignment.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD alignment.d -MF .deps/alignment.Tpo -MP -MT alignment.o -D_GNU_SOURCE -D HAVE_CONFIG_H alignment.cpp -quiet -dumpbase alignment.cpp -mtune=generic -march=x86-64 -auxbase-strip alignment.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccLsOeFB.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'alignment.o' '-MD' '-MP' '-MF' '.deps/alignment.Tpo' '-c' '-o' 'alignment.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o alignment.o /tmp/ccLsOeFB.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'alignment.o' '-MD' '-MP' '-MF' '.deps/alignment.Tpo' '-c' '-o' 'alignment.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo suffix_tree.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT suffix_tree.o -MD -MP -MF $depbase.Tpo -c -o suffix_tree.o suffix_tree.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'suffix_tree.o' '-MD' '-MP' '-MF' '.deps/suffix_tree.Tpo' '-c' '-o' 'suffix_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD suffix_tree.d -MF .deps/suffix_tree.Tpo -MP -MT suffix_tree.o -D_GNU_SOURCE -D HAVE_CONFIG_H suffix_tree.cpp -quiet -dumpbase suffix_tree.cpp -mtune=generic -march=x86-64 -auxbase-strip suffix_tree.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccfXndqe.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'suffix_tree.o' '-MD' '-MP' '-MF' '.deps/suffix_tree.Tpo' '-c' '-o' 'suffix_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o suffix_tree.o /tmp/ccfXndqe.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'suffix_tree.o' '-MD' '-MP' '-MF' '.deps/suffix_tree.Tpo' '-c' '-o' 'suffix_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo trim_primer_quality.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT trim_primer_quality.o -MD -MP -MF $depbase.Tpo -c -o trim_primer_quality.o trim_primer_quality.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'trim_primer_quality.o' '-MD' '-MP' '-MF' '.deps/trim_primer_quality.Tpo' '-c' '-o' 'trim_primer_quality.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD trim_primer_quality.d -MF .deps/trim_primer_quality.Tpo -MP -MT trim_primer_quality.o -D_GNU_SOURCE -D HAVE_CONFIG_H trim_primer_quality.cpp -quiet -dumpbase trim_primer_quality.cpp -mtune=generic -march=x86-64 -auxbase-strip trim_primer_quality.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/cccBQd7O.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'trim_primer_quality.o' '-MD' '-MP' '-MF' '.deps/trim_primer_quality.Tpo' '-c' '-o' 'trim_primer_quality.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o trim_primer_quality.o /tmp/cccBQd7O.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'trim_primer_quality.o' '-MD' '-MP' '-MF' '.deps/trim_primer_quality.Tpo' '-c' '-o' 'trim_primer_quality.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo remove_reads_from_amplicon.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT remove_reads_from_amplicon.o -MD -MP -MF $depbase.Tpo -c -o remove_reads_from_amplicon.o remove_reads_from_amplicon.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'remove_reads_from_amplicon.o' '-MD' '-MP' '-MF' '.deps/remove_reads_from_amplicon.Tpo' '-c' '-o' 'remove_reads_from_amplicon.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD remove_reads_from_amplicon.d -MF .deps/remove_reads_from_amplicon.Tpo -MP -MT remove_reads_from_amplicon.o -D_GNU_SOURCE -D HAVE_CONFIG_H remove_reads_from_amplicon.cpp -quiet -dumpbase remove_reads_from_amplicon.cpp -mtune=generic -march=x86-64 -auxbase-strip remove_reads_from_amplicon.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccCjsuwq.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'remove_reads_from_amplicon.o' '-MD' '-MP' '-MF' '.deps/remove_reads_from_amplicon.Tpo' '-c' '-o' 'remove_reads_from_amplicon.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o remove_reads_from_amplicon.o /tmp/ccCjsuwq.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'remove_reads_from_amplicon.o' '-MD' '-MP' '-MF' '.deps/remove_reads_from_amplicon.Tpo' '-c' '-o' 'remove_reads_from_amplicon.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo call_variants.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT call_variants.o -MD -MP -MF $depbase.Tpo -c -o call_variants.o call_variants.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_variants.o' '-MD' '-MP' '-MF' '.deps/call_variants.Tpo' '-c' '-o' 'call_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD call_variants.d -MF .deps/call_variants.Tpo -MP -MT call_variants.o -D_GNU_SOURCE -D HAVE_CONFIG_H call_variants.cpp -quiet -dumpbase call_variants.cpp -mtune=generic -march=x86-64 -auxbase-strip call_variants.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccBGc450.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_variants.o' '-MD' '-MP' '-MF' '.deps/call_variants.Tpo' '-c' '-o' 'call_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o call_variants.o /tmp/ccBGc450.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'call_variants.o' '-MD' '-MP' '-MF' '.deps/call_variants.Tpo' '-c' '-o' 'call_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo primer_bed.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT primer_bed.o -MD -MP -MF $depbase.Tpo -c -o primer_bed.o primer_bed.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'primer_bed.o' '-MD' '-MP' '-MF' '.deps/primer_bed.Tpo' '-c' '-o' 'primer_bed.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD primer_bed.d -MF .deps/primer_bed.Tpo -MP -MT primer_bed.o -D_GNU_SOURCE -D HAVE_CONFIG_H primer_bed.cpp -quiet -dumpbase primer_bed.cpp -mtune=generic -march=x86-64 -auxbase-strip primer_bed.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccq7bFxE.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'primer_bed.o' '-MD' '-MP' '-MF' '.deps/primer_bed.Tpo' '-c' '-o' 'primer_bed.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o primer_bed.o /tmp/ccq7bFxE.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'primer_bed.o' '-MD' '-MP' '-MF' '.deps/primer_bed.Tpo' '-c' '-o' 'primer_bed.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo allele_functions.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT allele_functions.o -MD -MP -MF $depbase.Tpo -c -o allele_functions.o allele_functions.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'allele_functions.o' '-MD' '-MP' '-MF' '.deps/allele_functions.Tpo' '-c' '-o' 'allele_functions.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD allele_functions.d -MF .deps/allele_functions.Tpo -MP -MT allele_functions.o -D_GNU_SOURCE -D HAVE_CONFIG_H allele_functions.cpp -quiet -dumpbase allele_functions.cpp -mtune=generic -march=x86-64 -auxbase-strip allele_functions.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/cco6PkOh.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'allele_functions.o' '-MD' '-MP' '-MF' '.deps/allele_functions.Tpo' '-c' '-o' 'allele_functions.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o allele_functions.o /tmp/cco6PkOh.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'allele_functions.o' '-MD' '-MP' '-MF' '.deps/allele_functions.Tpo' '-c' '-o' 'allele_functions.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo get_masked_amplicons.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT get_masked_amplicons.o -MD -MP -MF $depbase.Tpo -c -o get_masked_amplicons.o get_masked_amplicons.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_masked_amplicons.o' '-MD' '-MP' '-MF' '.deps/get_masked_amplicons.Tpo' '-c' '-o' 'get_masked_amplicons.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD get_masked_amplicons.d -MF .deps/get_masked_amplicons.Tpo -MP -MT get_masked_amplicons.o -D_GNU_SOURCE -D HAVE_CONFIG_H get_masked_amplicons.cpp -quiet -dumpbase get_masked_amplicons.cpp -mtune=generic -march=x86-64 -auxbase-strip get_masked_amplicons.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccaymbWR.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_masked_amplicons.o' '-MD' '-MP' '-MF' '.deps/get_masked_amplicons.Tpo' '-c' '-o' 'get_masked_amplicons.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o get_masked_amplicons.o /tmp/ccaymbWR.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_masked_amplicons.o' '-MD' '-MP' '-MF' '.deps/get_masked_amplicons.Tpo' '-c' '-o' 'get_masked_amplicons.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo get_common_variants.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT get_common_variants.o -MD -MP -MF $depbase.Tpo -c -o get_common_variants.o get_common_variants.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_common_variants.o' '-MD' '-MP' '-MF' '.deps/get_common_variants.Tpo' '-c' '-o' 'get_common_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD get_common_variants.d -MF .deps/get_common_variants.Tpo -MP -MT get_common_variants.o -D_GNU_SOURCE -D HAVE_CONFIG_H get_common_variants.cpp -quiet -dumpbase get_common_variants.cpp -mtune=generic -march=x86-64 -auxbase-strip get_common_variants.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccB2u1Kr.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_common_variants.o' '-MD' '-MP' '-MF' '.deps/get_common_variants.Tpo' '-c' '-o' 'get_common_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o get_common_variants.o /tmp/ccB2u1Kr.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'get_common_variants.o' '-MD' '-MP' '-MF' '.deps/get_common_variants.Tpo' '-c' '-o' 'get_common_variants.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo parse_gff.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT parse_gff.o -MD -MP -MF $depbase.Tpo -c -o parse_gff.o parse_gff.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'parse_gff.o' '-MD' '-MP' '-MF' '.deps/parse_gff.Tpo' '-c' '-o' 'parse_gff.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD parse_gff.d -MF .deps/parse_gff.Tpo -MP -MT parse_gff.o -D_GNU_SOURCE -D HAVE_CONFIG_H parse_gff.cpp -quiet -dumpbase parse_gff.cpp -mtune=generic -march=x86-64 -auxbase-strip parse_gff.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccClYZZ4.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'parse_gff.o' '-MD' '-MP' '-MF' '.deps/parse_gff.Tpo' '-c' '-o' 'parse_gff.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o parse_gff.o /tmp/ccClYZZ4.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'parse_gff.o' '-MD' '-MP' '-MF' '.deps/parse_gff.Tpo' '-c' '-o' 'parse_gff.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo ref_seq.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT ref_seq.o -MD -MP -MF $depbase.Tpo -c -o ref_seq.o ref_seq.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ref_seq.o' '-MD' '-MP' '-MF' '.deps/ref_seq.Tpo' '-c' '-o' 'ref_seq.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD ref_seq.d -MF .deps/ref_seq.Tpo -MP -MT ref_seq.o -D_GNU_SOURCE -D HAVE_CONFIG_H ref_seq.cpp -quiet -dumpbase ref_seq.cpp -mtune=generic -march=x86-64 -auxbase-strip ref_seq.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/ccDAhSUE.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ref_seq.o' '-MD' '-MP' '-MF' '.deps/ref_seq.Tpo' '-c' '-o' 'ref_seq.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o ref_seq.o /tmp/ccDAhSUE.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'ref_seq.o' '-MD' '-MP' '-MF' '.deps/ref_seq.Tpo' '-c' '-o' 'ref_seq.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+depbase=`echo interval_tree.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+g++ -DHAVE_CONFIG_H -I. -I..     -v -g -std=c++11 -Wall -Wextra -Werror -MT interval_tree.o -MD -MP -MF $depbase.Tpo -c -o interval_tree.o interval_tree.cpp &&\
+mv -f $depbase.Tpo $depbase.Po
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'interval_tree.o' '-MD' '-MP' '-MF' '.deps/interval_tree.Tpo' '-c' '-o' 'interval_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/cc1plus -quiet -v -I . -I .. -MD interval_tree.d -MF .deps/interval_tree.Tpo -MP -MT interval_tree.o -D_GNU_SOURCE -D HAVE_CONFIG_H interval_tree.cpp -quiet -dumpbase interval_tree.cpp -mtune=generic -march=x86-64 -auxbase-strip interval_tree.o -g -Wall -Wextra -Werror -std=c++11 -version -o /tmp/cc7OLmFf.s
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ ..
+ /usr/include/c++/7
+ /usr/include/c++/7/x86_64-suse-linux
+ /usr/include/c++/7/backward
+ /usr/lib64/gcc/x86_64-suse-linux/7/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include
+ /usr/include
+End of search list.
+GNU C++11 (SUSE Linux) version 7.5.0 (x86_64-suse-linux)
+	compiled by GNU C version 7.5.0, GMP version 6.1.2, MPFR version 4.0.2-p6, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 6382e6e95418232cdb97da9bdda1863e
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'interval_tree.o' '-MD' '-MP' '-MF' '.deps/interval_tree.Tpo' '-c' '-o' 'interval_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/as -v -I . -I .. --64 -o interval_tree.o /tmp/cc7OLmFf.s
+GNU assembler version 2.37 (x86_64-suse-linux) using BFD version (GNU Binutils; SUSE Linux Enterprise 15) 2.37.20211103-7.26
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-D' 'HAVE_CONFIG_H' '-I' '.' '-I' '..' '-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-MT' 'interval_tree.o' '-MD' '-MP' '-MF' '.deps/interval_tree.Tpo' '-c' '-o' 'interval_tree.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+g++  -v -g -std=c++11 -Wall -Wextra -Werror   -o ivar ivar.o call_consensus_pileup.o alignment.o suffix_tree.o trim_primer_quality.o remove_reads_from_amplicon.o call_variants.o primer_bed.o allele_functions.o get_masked_amplicons.o get_common_variants.o parse_gff.o ref_seq.o interval_tree.o -lhts -lz -lpthread -lhts -lz -lpthread
+Using built-in specs.
+COLLECT_GCC=g++
+COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper
+OFFLOAD_TARGET_NAMES=hsa:nvptx-none
+Target: x86_64-suse-linux
+Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go --enable-offload-targets=hsa,nvptx-none, --without-cuda-driver --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/7 --enable-ssp --disable-libssp --disable-libvtv --disable-libcc1 --disable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-7 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+Thread model: posix
+gcc version 7.5.0 (SUSE Linux) 
+COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/
+LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/7/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-o' 'ivar' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-suse-linux/7/collect2 -plugin /usr/lib64/gcc/x86_64-suse-linux/7/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccyLHehF.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o ivar /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/7/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/7 -L/usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/7/../../.. ivar.o call_consensus_pileup.o alignment.o suffix_tree.o trim_primer_quality.o remove_reads_from_amplicon.o call_variants.o primer_bed.o allele_functions.o get_masked_amplicons.o get_common_variants.o parse_gff.o ref_seq.o interval_tree.o -lhts -lz -lpthread -lhts -lz -lpthread -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-suse-linux/7/crtend.o /usr/lib64/gcc/x86_64-suse-linux/7/../../../../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-g' '-std=c++11' '-Wall' '-Wextra' '-Werror' '-o' 'ivar' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master/src'
+Making all in tests
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master/tests'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master/tests'
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master'
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master'
+make[1]: Leaving directory '/home/user/Desktop/now3/ivar-master'
+Making install in src
+make[1]: Entering directory '/home/user/Desktop/now3/ivar-master/src'
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master/src'
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /usr/bin/install -c ivar '/usr/local/bin'
+make[2]: Nothing to be done for 'install-data-am'.
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master/src'
+make[1]: Leaving directory '/home/user/Desktop/now3/ivar-master/src'
+Making install in tests
+make[1]: Entering directory '/home/user/Desktop/now3/ivar-master/tests'
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master/tests'
+make[2]: Nothing to be done for 'install-exec-am'.
+make[2]: Nothing to be done for 'install-data-am'.
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master/tests'
+make[1]: Leaving directory '/home/user/Desktop/now3/ivar-master/tests'
+make[1]: Entering directory '/home/user/Desktop/now3/ivar-master'
+make[2]: Entering directory '/home/user/Desktop/now3/ivar-master'
+make[2]: Nothing to be done for 'install-exec-am'.
+make[2]: Nothing to be done for 'install-data-am'.
+make[2]: Leaving directory '/home/user/Desktop/now3/ivar-master'
+make[1]: Leaving directory '/home/user/Desktop/now3/ivar-master'
+iVar version 1.3.1
+
+Please raise issues and bug reports at https://github.com/andersen-lab/ivar/
+
+user@localhost:~/Desktop/now3> 
