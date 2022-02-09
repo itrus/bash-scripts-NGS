@@ -3,6 +3,9 @@
 ## 1	SUMMARY
 
 This manual describes a bioinformatics pipeline used to identify SNVs (single nucleotide variants) in Next-Generation Sequencing (NGS) data from ZIKV and PCV2 genomes. The pipeline can be adapted to analyse NGS data from other viruses. In the first step, paired-end reads from illumina NGS data are preprocessed. After confirming the expected coverage and depth in the PhiX sequencing control, SNVs are detected with iVAR package.
+The current manual was published as Supplementary File in Viruses. But as soon as code can not be updated I decided to upload all the scripts to GitHub.
+
+> Udenze, Daniel, Ivan Trus, Henry Munyanduki, Nathalie Berube, and Uladzimir Karniychuk. 2021. "The Isolated in Utero Environment Is Conducive to the Emergence of RNA and DNA Virus Variants" _Viruses_ 13, no. 9: 1827. https://doi.org/10.3390/v13091827
 
 ## 2	PREREQUISITES
 
