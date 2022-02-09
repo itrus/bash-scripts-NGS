@@ -1,11 +1,19 @@
 # Single nucleotide variation analysis in Zika virus (ZIKV) and porcine circovirus 2 (PCV2) genomes
 
+The current manual was published as Supplementary File in Viruses. But as soon as code can not be updated there, I decided to upload all the scripts to GitHub.
+
+> Udenze, Daniel, Ivan Trus, Henry Munyanduki, Nathalie Berube, and Uladzimir Karniychuk. 2021. "The Isolated in Utero Environment Is Conducive to the Emergence of RNA and DNA Virus Variants" _Viruses_ 13, no. 9: 1827. https://doi.org/10.3390/v13091827
+
 ## 1	SUMMARY
 
 This manual describes a bioinformatics pipeline used to identify SNVs (single nucleotide variants) in Next-Generation Sequencing (NGS) data from ZIKV and PCV2 genomes. The pipeline can be adapted to analyse NGS data from other viruses. In the first step, paired-end reads from illumina NGS data are preprocessed. After confirming the expected coverage and depth in the PhiX sequencing control, SNVs are detected with iVAR package.
-The current manual was published as Supplementary File in Viruses. But as soon as code can not be updated I decided to upload all the scripts to GitHub.
 
-> Udenze, Daniel, Ivan Trus, Henry Munyanduki, Nathalie Berube, and Uladzimir Karniychuk. 2021. "The Isolated in Utero Environment Is Conducive to the Emergence of RNA and DNA Virus Variants" _Viruses_ 13, no. 9: 1827. https://doi.org/10.3390/v13091827
+
+![Figure 1. Preprocessing](https://github.com/itrus/bash-scripts-NGS/raw/main/iVAR/overview%20pre-processing.png)
+Figure 1. Preprocessing
+
+![Figure 2. Variant calling](https://raw.githubusercontent.com/itrus/bash-scripts-NGS/main/iVAR/overview%20variant%20calling.png)
+Figure 2. SNVs calling with iVAR
 
 ## 2	PREREQUISITES
 
@@ -15,11 +23,9 @@ cd "/home/ngs1/zika virus in utero heterogeneity IP versus IC/temporary"
 
 After running each command:
 
-o	If several commands were copy-pasted, check that the last command was executed. If not, press Enter to launch the last command.
-
-o	Read all output in Terminal to check if there are no errors.
-
-o	Copy-paste the terminal session's output to a file (log.txt) and save it in the working folder for each step.
+- If several commands were copy-pasted, check that the last command was executed. If not, press Enter to launch the last command.
+-	Read all output in Terminal to check if there are no errors.
+-	Copy-paste the terminal session's output to a file (log.txt) and save it in the working folder for each step.
 
 For each step, you need an empty working directory. Bring input files; after successful execution, delete input files, but preserve all newly created files (results) and reference files (e.g., GENOME-, BED-files, etc.). This allows us to go back and to repeat any step under the same or different conditions, if necessary.
 
@@ -58,26 +64,36 @@ make
 sudo make install
 ```
 
-Install iVAR (https://github.com/andersen-lab/ivar).
-
-```
-wget https://github.com/andersen-lab/ivar/archive/refs/heads/master.zip
-unzip ./master.zip
-cd ./ivar-master/
-./autogen.sh
-./configure
-make
-sudo make install
-```
-
-Test installation of iVAR 1.3.1.
-
-```
-ivar version
-```
+Install iVAR (https://github.com/andersen-lab/ivar) with running the **install-ivar.sh** script.
 
 Install Trimmomatic (v 0.40; binary; http://www.usadellab.org/cms/?page=trimmomatic). Download and unpack it to /home/user/bin/Trimmomatic-0.40/. UGENE on Windows contains a build-in version of Trimmomatic and can replace the Linux version.
 ```
 unzip ./Trimmomatic-0.40.zip
 ```
 To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (Right mouse button > Open With Software Install > Install)
+
+## 4	QUALITY CONTROL
+
+Use Illumina Seq Analysis Viewer 2.4.7.0 for Windows to see the general report of the sequencing (Browse > Use MiSeq output whole folder as input for Illumina Seq Analysis Viewer). The full manual for the software package is available at illumina’s website (https://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/sav/sequencing-analysis-viewer-user-guide-15020619-f.pdf).
+
+Create a report in Word containing charts and data. To enlarge the chart click the chevron in the upper right corner of each chart. To copy-paste charts, click it with the right mouse button and select Copy To Clipboard.
+1. Analysis tab
+   - Data by Cycle
+     - Error Rate (percentage of wrong bases in the PhiX control reads).
+     - Called Int  (corrected intensity of base calls)
+   - QScore Distribution (Q20 corresponds to 1% error rate, Q30 corresponds to 0.1% error rate)
+   - Data by Lane
+     - % Aligned (Frequency of reads representing PhiX)
+   - Qscore Heatmap (Q-scores by cycle)
+2. Summary tab. Press Copy To Clipboard to copy-paste data.
+   - Total – Yield Total (G) (Total number of Gbp saved)
+   - Total – Aligned (%) (Frequency of reads representing PhiX)
+   - Error Rate (%) (percentage of wrong bases in the PhiX control reads)
+3. Indexing tab.
+   - Total reads (total number of reads saved)
+   - % reads Identified (PF) (percentage of reads with barcodes)
+   - Min and Max (percentage of the least and most frequent barcodes)
+   - Click on a table with individual indexes with left mouse button, then press Control+A > Control+C to copy-paste the table content.
+   - Barchart contains a graphical representation of the table. Copy-paste chart by clicking it with the right mouse button and selecting Copy To Clipboard.
+
+Use the corresponding folder to save the results (screenshots).
