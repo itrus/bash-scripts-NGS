@@ -9,10 +9,10 @@ The current manual was published as Supplementary File in Viruses. But as soon a
 This manual describes a bioinformatics pipeline used to identify SNVs (single nucleotide variants) in Next-Generation Sequencing (NGS) data from ZIKV and PCV2 genomes. The pipeline can be adapted to analyse NGS data from other viruses. In the first step, paired-end reads from illumina NGS data are preprocessed. After confirming the expected coverage and depth in the PhiX sequencing control, SNVs are detected with iVAR package.
 
 
-![Figure 1. Preprocessing](https://github.com/itrus/bash-scripts-NGS/raw/main/iVAR/overview%20pre-processing.png)
+![overview pre-processing](https://user-images.githubusercontent.com/9166776/153178845-8a7f503e-77e5-4d4b-a313-1b030ea1ea11.png)
 Figure 1. Preprocessing
 
-![Figure 2. Variant calling](https://raw.githubusercontent.com/itrus/bash-scripts-NGS/main/iVAR/overview%20variant%20calling.png)
+![overview variant calling](https://user-images.githubusercontent.com/9166776/153178924-816a78f3-cd8d-49e1-b730-7c60ac2edf11.png)
 Figure 2. SNVs calling with iVAR
 
 ## 2	PREREQUISITES
