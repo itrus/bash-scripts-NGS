@@ -1,0 +1,619 @@
+user@localhost:~/Desktop/now2> ./ivar_run.sh 
+Thu 17 Feb 2022 11:47:10 AM CET
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index ZIKV-PR.fasta
+[main] Real time: 0.042 sec; CPU: 0.007 sec
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 70 sequences (1542 bp)...
+[M::mem_process_seqs] Processed 70 reads in 0.003 CPU sec, 0.005 real sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa mem -k 5 -T 16 ZIKV-PR.fasta primers.fasta
+[main] Real time: 0.006 sec; CPU: 0.005 sec
+
+
+Part 1: processing individual files with indexing, trimming, sorting, and indexing
+
+
+[processing] WTF13PL_a
+[indexing] samtools index WTF13PL_a.bam
+[trimming] ivar trim -b primers.bed -i WTF13PL_a.bam -p WTF13PL_a.trimmed
+Found 70 primers in BED file
+Amplicons detected: 
+
+Number of references in file: 1
+KU501215.1
+Using Region: KU501215.1
+
+Found 491908 mapped reads
+Found 0 unmapped reads
+Sorted By Coordinate
+-------
+Processed 10% reads ... 
+Processed 20% reads ... 
+Processed 30% reads ... 
+Processed 40% reads ... 
+Processed 50% reads ... 
+Processed 60% reads ... 
+Processed 70% reads ... 
+Processed 80% reads ... 
+Processed 90% reads ... 
+Processed 100% reads ... 
+
+-------
+Results: 
+Primer Name	Read Count
+400_1_out_L	143
+400_1_out_R	143
+400_2_out_L	21012
+400_2_out_R	21155
+400_3_out_L*	1518
+400_3_out_R*	1521
+400_4_out_L	12790
+400_4_out_R	12803
+400_5_out_L	4606
+400_5_out_R	4606
+400_6_out_L	4443
+400_6_out_R	4444
+400_7_out_L	25682
+400_7_out_R	25675
+400_8_out_L*	5529
+400_8_out_R*	5572
+400_9_out_L*	372
+400_9_out_R*	637
+400_10_out_L	3915
+400_10_out_R	3916
+400_11_out_L	5070
+400_11_out_R	4806
+400_12_out_L	4412
+400_12_out_R	4373
+400_13_out_L	21748
+400_13_out_R	21717
+400_14_out_L*	10517
+400_14_out_R*	10533
+400_15_out_L	10381
+400_15_out_R	10385
+400_16_out_L*	12099
+400_16_out_R*	12092
+400_17_out_L**	6133
+400_17_out_R**	6144
+400_18_out_L**	0
+400_18_out_R**	0
+400_19_out_L	13888
+400_19_out_R	13887
+400_20_out_L*	443
+400_20_out_R*	450
+400_21_out_L*	70
+400_21_out_R*	70
+400_22_out_L**	0
+400_22_out_R**	0
+400_23_out_L	22665
+400_23_out_R	22665
+400_24_out_L**	806
+400_24_out_R**	902
+400_25_out_L**	186
+400_25_out_R**	94
+400_26_out_L	15783
+400_26_out_R	15763
+400_27_out_L	622
+400_27_out_R	627
+400_28_out_L	7566
+400_28_out_R	7544
+400_29_out_L	9813
+400_29_out_R	9823
+400_30_out_L	16201
+400_30_out_R	16244
+400_31_out_L	1517
+400_31_out_R	1523
+400_32_out_L	1734
+400_32_out_R	1735
+400_33_out_L*	1196
+400_33_out_R*	1189
+400_34_out_L*	2612
+400_34_out_R*	2610
+400_35_out_L	0
+400_35_out_R	0
+
+Trimmed primers from 99.82% (491020) of reads.
+0.91% (4471) of reads were quality trimmed below the minimum length of 30 bp and were not written to file.
+0.18% (884) of reads that started outside of primer regions were not written to file
+0.15% (714) of reads had their insert size smaller than their read length
+[sorting] samtools sort WTF13PL_a.trimmed.bam -o WTF13PL_a.trimmed.sorted.bam
+[indexing] samtools index WTF13PL_a.trimmed.sorted.bam
+
+[processing] WTF13PL_b
+[indexing] samtools index WTF13PL_b.bam
+[trimming] ivar trim -b primers.bed -i WTF13PL_b.bam -p WTF13PL_b.trimmed
+Found 70 primers in BED file
+Amplicons detected: 
+
+Number of references in file: 1
+KU501215.1
+Using Region: KU501215.1
+
+Found 775886 mapped reads
+Found 0 unmapped reads
+Sorted By Coordinate
+-------
+Processed 10% reads ... 
+Processed 20% reads ... 
+Processed 30% reads ... 
+Processed 40% reads ... 
+Processed 50% reads ... 
+Processed 60% reads ... 
+Processed 70% reads ... 
+Processed 80% reads ... 
+Processed 90% reads ... 
+Processed 100% reads ... 
+
+-------
+Results: 
+Primer Name	Read Count
+400_1_out_L	877
+400_1_out_R	868
+400_2_out_L	32682
+400_2_out_R	33040
+400_3_out_L*	176
+400_3_out_R*	174
+400_4_out_L	19660
+400_4_out_R	19677
+400_5_out_L	10270
+400_5_out_R	10274
+400_6_out_L	10057
+400_6_out_R	9997
+400_7_out_L	33025
+400_7_out_R	33020
+400_8_out_L*	7055
+400_8_out_R*	7138
+400_9_out_L*	2114
+400_9_out_R*	2334
+400_10_out_L	4286
+400_10_out_R	4337
+400_11_out_L	9888
+400_11_out_R	9901
+400_12_out_L	16077
+400_12_out_R	16033
+400_13_out_L	27345
+400_13_out_R	27310
+400_14_out_L*	17606
+400_14_out_R*	17618
+400_15_out_L	15192
+400_15_out_R	15194
+400_16_out_L*	18574
+400_16_out_R*	18575
+400_17_out_L**	14322
+400_17_out_R**	14022
+400_18_out_L**	3
+400_18_out_R**	3
+400_19_out_L	13231
+400_19_out_R	13212
+400_20_out_L*	1018
+400_20_out_R*	1282
+400_21_out_L*	1095
+400_21_out_R*	1099
+400_22_out_L**	1811
+400_22_out_R**	1
+400_23_out_L	26699
+400_23_out_R	26665
+400_24_out_L**	8787
+400_24_out_R**	8803
+400_25_out_L**	2765
+400_25_out_R**	2761
+400_26_out_L	17960
+400_26_out_R	17981
+400_27_out_L	2814
+400_27_out_R	2842
+400_28_out_L	10239
+400_28_out_R	10046
+400_29_out_L	13556
+400_29_out_R	13561
+400_30_out_L	22656
+400_30_out_R	22746
+400_31_out_L	5321
+400_31_out_R	5392
+400_32_out_L	4724
+400_32_out_R	4808
+400_33_out_L*	3352
+400_33_out_R*	3236
+400_34_out_L*	11488
+400_34_out_R*	11480
+400_35_out_L	0
+400_35_out_R	0
+
+Trimmed primers from 99.5% (772024) of reads.
+0.5% (3845) of reads were quality trimmed below the minimum length of 30 bp and were not written to file.
+0.5% (3857) of reads that started outside of primer regions were not written to file
+0.14% (1060) of reads had their insert size smaller than their read length
+[sorting] samtools sort WTF13PL_b.trimmed.bam -o WTF13PL_b.trimmed.sorted.bam
+[indexing] samtools index WTF13PL_b.trimmed.sorted.bam
+
+[processing] WTF16PL_a
+[indexing] samtools index WTF16PL_a.bam
+[trimming] ivar trim -b primers.bed -i WTF16PL_a.bam -p WTF16PL_a.trimmed
+Found 70 primers in BED file
+Amplicons detected: 
+
+Number of references in file: 1
+KU501215.1
+Using Region: KU501215.1
+
+Found 523701 mapped reads
+Found 0 unmapped reads
+Sorted By Coordinate
+-------
+Processed 10% reads ... 
+Processed 20% reads ... 
+Processed 30% reads ... 
+Processed 40% reads ... 
+Processed 50% reads ... 
+Processed 60% reads ... 
+Processed 70% reads ... 
+Processed 80% reads ... 
+Processed 90% reads ... 
+Processed 100% reads ... 
+
+-------
+Results: 
+Primer Name	Read Count
+400_1_out_L	795
+400_1_out_R	787
+400_2_out_L	18254
+400_2_out_R	18381
+400_3_out_L*	3589
+400_3_out_R*	3658
+400_4_out_L	8719
+400_4_out_R	8719
+400_5_out_L	8777
+400_5_out_R	8764
+400_6_out_L	9726
+400_6_out_R	9755
+400_7_out_L	16319
+400_7_out_R	16328
+400_8_out_L*	6931
+400_8_out_R*	6980
+400_9_out_L*	1007
+400_9_out_R*	1010
+400_10_out_L	9326
+400_10_out_R	9318
+400_11_out_L	5553
+400_11_out_R	5548
+400_12_out_L	8508
+400_12_out_R	8514
+400_13_out_L	12072
+400_13_out_R	12064
+400_14_out_L*	11009
+400_14_out_R*	10994
+400_15_out_L	13010
+400_15_out_R	13011
+400_16_out_L*	10762
+400_16_out_R*	10758
+400_17_out_L**	7606
+400_17_out_R**	7607
+400_18_out_L**	174
+400_18_out_R**	160
+400_19_out_L	9044
+400_19_out_R	9005
+400_20_out_L*	10539
+400_20_out_R*	10594
+400_21_out_L*	2860
+400_21_out_R*	2874
+400_22_out_L**	71
+400_22_out_R**	68
+400_23_out_L	16609
+400_23_out_R	16609
+400_24_out_L**	2065
+400_24_out_R**	2063
+400_25_out_L**	477
+400_25_out_R**	473
+400_26_out_L	12988
+400_26_out_R	12975
+400_27_out_L	3228
+400_27_out_R	3233
+400_28_out_L	6297
+400_28_out_R	6283
+400_29_out_L	9350
+400_29_out_R	9317
+400_30_out_L	18866
+400_30_out_R	18949
+400_31_out_L	3080
+400_31_out_R	3091
+400_32_out_L	3286
+400_32_out_R	3280
+400_33_out_L*	2739
+400_33_out_R*	2737
+400_34_out_L*	7522
+400_34_out_R*	7489
+400_35_out_L	41
+400_35_out_R	17
+
+Trimmed primers from 99.79% (522608) of reads.
+0.59% (3075) of reads were quality trimmed below the minimum length of 30 bp and were not written to file.
+0.21% (1089) of reads that started outside of primer regions were not written to file
+0.01% (71) of reads had their insert size smaller than their read length
+[sorting] samtools sort WTF16PL_a.trimmed.bam -o WTF16PL_a.trimmed.sorted.bam
+[indexing] samtools index WTF16PL_a.trimmed.sorted.bam
+
+[processing] WTF16PL_b
+[indexing] samtools index WTF16PL_b.bam
+[trimming] ivar trim -b primers.bed -i WTF16PL_b.bam -p WTF16PL_b.trimmed
+Found 70 primers in BED file
+Amplicons detected: 
+
+Number of references in file: 1
+KU501215.1
+Using Region: KU501215.1
+
+Found 762417 mapped reads
+Found 0 unmapped reads
+Sorted By Coordinate
+-------
+Processed 10% reads ... 
+Processed 20% reads ... 
+Processed 30% reads ... 
+Processed 40% reads ... 
+Processed 50% reads ... 
+Processed 60% reads ... 
+Processed 70% reads ... 
+Processed 80% reads ... 
+Processed 90% reads ... 
+Processed 100% reads ... 
+
+-------
+Results: 
+Primer Name	Read Count
+400_1_out_L	3236
+400_1_out_R	3209
+400_2_out_L	20396
+400_2_out_R	20518
+400_3_out_L*	9018
+400_3_out_R*	9021
+400_4_out_L	11997
+400_4_out_R	11988
+400_5_out_L	11986
+400_5_out_R	11969
+400_6_out_L	10165
+400_6_out_R	10224
+400_7_out_L	19074
+400_7_out_R	19080
+400_8_out_L*	8994
+400_8_out_R*	9052
+400_9_out_L*	2362
+400_9_out_R*	2367
+400_10_out_L	10670
+400_10_out_R	10669
+400_11_out_L	8299
+400_11_out_R	8292
+400_12_out_L	14089
+400_12_out_R	14096
+400_13_out_L	14975
+400_13_out_R	14947
+400_14_out_L*	14694
+400_14_out_R*	14712
+400_15_out_L	15046
+400_15_out_R	15048
+400_16_out_L*	14307
+400_16_out_R*	14281
+400_17_out_L**	13487
+400_17_out_R**	13493
+400_18_out_L**	183
+400_18_out_R**	163
+400_19_out_L	12146
+400_19_out_R	12096
+400_20_out_L*	10688
+400_20_out_R*	10806
+400_21_out_L*	11576
+400_21_out_R*	11651
+400_22_out_L**	330
+400_22_out_R**	319
+400_23_out_L	19857
+400_23_out_R	19853
+400_24_out_L**	8406
+400_24_out_R**	8415
+400_25_out_L**	5704
+400_25_out_R**	5702
+400_26_out_L	16292
+400_26_out_R	16270
+400_27_out_L	6375
+400_27_out_R	6379
+400_28_out_L	10867
+400_28_out_R	10853
+400_29_out_L	10636
+400_29_out_R	10626
+400_30_out_L	20077
+400_30_out_R	20132
+400_31_out_L	8543
+400_31_out_R	8572
+400_32_out_L	9541
+400_32_out_R	9546
+400_33_out_L*	9385
+400_33_out_R*	9361
+400_34_out_L*	16914
+400_34_out_R*	16891
+400_35_out_L	28
+400_35_out_R	16
+
+Trimmed primers from 99.81% (760952) of reads.
+0.49% (3726) of reads were quality trimmed below the minimum length of 30 bp and were not written to file.
+0.19% (1464) of reads that started outside of primer regions were not written to file
+0.01% (111) of reads had their insert size smaller than their read length
+[sorting] samtools sort WTF16PL_b.trimmed.bam -o WTF16PL_b.trimmed.sorted.bam
+[indexing] samtools index WTF16PL_b.trimmed.sorted.bam
+
+
+Part 2: processing two replicates with merging, making and indexing consensus, primers processing (aligning, framing, and finding mismatches)
+
+
+[processing] WTF13PL
+[merging replicates] samtools merge WTF13PL.merged.bam WTF13PL_a.trimmed.sorted.bam WTF13PL_b.trimmed.sorted.bam
+[making consensus] samtools mpileup -A -d 1000000 -Q 0 WTF13PL.merged.bam | ivar consensus -p WTF13PL.consensus
+[mpileup] 1 samples in 1 input files
+Minimum Quality: 20
+Threshold: 0
+Minimum depth: 10
+Regions with depth less than minimum depth covered by: N
+Reference length: 10339
+Positions with 0 depth: 0
+Positions with depth below 10: 268
+[primers processing: indexing consensus] bwa index WTF13PL.consensus.fa
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index WTF13PL.consensus.fa
+[main] Real time: 0.027 sec; CPU: 0.006 sec
+[primers processing: conversion to sorted bam] bwa mem -k 5 -T 16 WTF13PL.consensus.fa primers.fasta | samtools view -bS -F 4 | samtools sort -o WTF13PL.primers_consensus.bam
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 70 sequences (1542 bp)...
+[M::mem_process_seqs] Processed 70 reads in 0.003 CPU sec, 0.005 real sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa mem -k 5 -T 16 WTF13PL.consensus.fa primers.fasta
+[main] Real time: 0.005 sec; CPU: 0.005 sec
+[primers processing: creating BED] bedtools bamtobed -i WTF13PL.primers_consensus.bam > WTF13PL.primers_consensus.bed
+[primers processing: creating TSV file] samtools mpileup -A -d 1000000 --reference WTF13PL.consensus.fa -Q 0 WTF13PL.primers_consensus.bam | ivar variants -p WTF13PL.primers_consensus -t 0.03
+A GFF file containing the open reading frames (ORFs) has not been provided. Amino acid translation will not be done.
+A reference sequence has not been supplied. Amino acid translation will not be done.
+[mpileup] 1 samples in 1 input files
+[primers processing: masking] ivar getmasked -i WTF13PL.primers_consensus.tsv -b WTF13PL.primers_consensus.bed -f primer_pair_information.tsv -p WTF13PL.mismatches
+Found 64 primers in BED file
+Primer pair for 400_1_out_R not found in BED file.
+Primer pair for 400_17_out_L** not found in BED file.
+Primer pair for 400_19_out_R not found in BED file.
+Primer pair for 400_23_out_R not found in BED file.
+Primer pair for 400_34_out_L* not found in BED file.
+Primer pair for 400_35_out_L not found in BED file.
+400_18_out_L**
+400_23_out_R
+400_32_out_L
+400_18_out_L**	400_18_out_R**	400_23_out_R	400_32_out_L	400_32_out_R
+
+[processing] WTF16PL
+[merging replicates] samtools merge WTF16PL.merged.bam WTF16PL_a.trimmed.sorted.bam WTF16PL_b.trimmed.sorted.bam
+[making consensus] samtools mpileup -A -d 1000000 -Q 0 WTF16PL.merged.bam | ivar consensus -p WTF16PL.consensus
+[mpileup] 1 samples in 1 input files
+Minimum Quality: 20
+Threshold: 0
+Minimum depth: 10
+Regions with depth less than minimum depth covered by: N
+Reference length: 10595
+Positions with 0 depth: 0
+Positions with depth below 10: 0
+[primers processing: indexing consensus] bwa index WTF16PL.consensus.fa
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index WTF16PL.consensus.fa
+[main] Real time: 0.042 sec; CPU: 0.006 sec
+[primers processing: conversion to sorted bam] bwa mem -k 5 -T 16 WTF16PL.consensus.fa primers.fasta | samtools view -bS -F 4 | samtools sort -o WTF16PL.primers_consensus.bam
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 70 sequences (1542 bp)...
+[M::mem_process_seqs] Processed 70 reads in 0.004 CPU sec, 0.004 real sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa mem -k 5 -T 16 WTF16PL.consensus.fa primers.fasta
+[main] Real time: 0.005 sec; CPU: 0.005 sec
+[primers processing: creating BED] bedtools bamtobed -i WTF16PL.primers_consensus.bam > WTF16PL.primers_consensus.bed
+[primers processing: creating TSV file] samtools mpileup -A -d 1000000 --reference WTF16PL.consensus.fa -Q 0 WTF16PL.primers_consensus.bam | ivar variants -p WTF16PL.primers_consensus -t 0.03
+A GFF file containing the open reading frames (ORFs) has not been provided. Amino acid translation will not be done.
+A reference sequence has not been supplied. Amino acid translation will not be done.
+[mpileup] 1 samples in 1 input files
+[primers processing: masking] ivar getmasked -i WTF16PL.primers_consensus.tsv -b WTF16PL.primers_consensus.bed -f primer_pair_information.tsv -p WTF16PL.mismatches
+Found 68 primers in BED file
+Primer pair for 400_1_out_R not found in BED file.
+Primer pair for 400_35_out_L not found in BED file.
+400_18_out_L**
+400_23_out_R
+400_32_out_L
+400_18_out_L**	400_18_out_R**	400_23_out_R	400_23_out_L	400_32_out_L	400_32_out_R
+
+
+Part 3: processing individual files with removing reads with mismatches, sorting BAM-file, and calling SNVs
+
+
+[processing] WTF13PL_a
+[removing reads] ivar removereads -i WTF13PL_a.trimmed.sorted.bam -p WTF13PL_a.trimmed.sorted.masked.bam -t WTF13PL.mismatches.txt -b primers.bed
+Found 70 primers in BED file
+Writing to WTF13PL_a.trimmed.sorted.masked.bam
+Number of references: 1
+Reference Name: KU501215.1
+Reference Length: 10675
+Using Region: KU501215.1
+Sorted By Coordinate
+Results:
+26017 reads were removed.
+[sorting resulting BAM] samtools sort WTF13PL_a.trimmed.sorted.masked.bam -o WTF13PL_a.trimmed.sorted.masked.sorted.bam
+[generating final TSV file] samtools mpileup -A -d 1000000 --reference ZIKV-PR.fasta -B -Q 0 WTF13PL_a.trimmed.sorted.masked.sorted.bam | ivar variants -p WTF13PL_a.SNV -t 0.03 -r ZIKV-PR.fasta -g GFF_FILE
+GFF file is not in GFF3 file format!
+[mpileup] 1 samples in 1 input files
+
+[processing] WTF13PL_b
+[removing reads] ivar removereads -i WTF13PL_b.trimmed.sorted.bam -p WTF13PL_b.trimmed.sorted.masked.bam -t WTF13PL.mismatches.txt -b primers.bed
+Found 70 primers in BED file
+Writing to WTF13PL_b.trimmed.sorted.masked.bam
+Number of references: 1
+Reference Name: KU501215.1
+Reference Length: 10675
+Using Region: KU501215.1
+Sorted By Coordinate
+Results:
+36121 reads were removed.
+[sorting resulting BAM] samtools sort WTF13PL_b.trimmed.sorted.masked.bam -o WTF13PL_b.trimmed.sorted.masked.sorted.bam
+[generating final TSV file] samtools mpileup -A -d 1000000 --reference ZIKV-PR.fasta -B -Q 0 WTF13PL_b.trimmed.sorted.masked.sorted.bam | ivar variants -p WTF13PL_b.SNV -t 0.03 -r ZIKV-PR.fasta -g GFF_FILE
+[mpileup] 1 samples in 1 input files
+GFF file is not in GFF3 file format!
+
+[processing] WTF16PL_a
+[removing reads] ivar removereads -i WTF16PL_a.trimmed.sorted.bam -p WTF16PL_a.trimmed.sorted.masked.bam -t WTF16PL.mismatches.txt -b primers.bed
+Found 70 primers in BED file
+Writing to WTF16PL_a.trimmed.sorted.masked.bam
+Number of references: 1
+Reference Name: KU501215.1
+Reference Length: 10675
+Using Region: KU501215.1
+Sorted By Coordinate
+Results:
+40018 reads were removed.
+[sorting resulting BAM] samtools sort WTF16PL_a.trimmed.sorted.masked.bam -o WTF16PL_a.trimmed.sorted.masked.sorted.bam
+[generating final TSV file] samtools mpileup -A -d 1000000 --reference ZIKV-PR.fasta -B -Q 0 WTF16PL_a.trimmed.sorted.masked.sorted.bam | ivar variants -p WTF16PL_a.SNV -t 0.03 -r ZIKV-PR.fasta -g GFF_FILE
+[mpileup] 1 samples in 1 input files
+GFF file is not in GFF3 file format!
+
+[processing] WTF16PL_b
+[removing reads] ivar removereads -i WTF16PL_b.trimmed.sorted.bam -p WTF16PL_b.trimmed.sorted.masked.bam -t WTF16PL.mismatches.txt -b primers.bed
+Found 70 primers in BED file
+Writing to WTF16PL_b.trimmed.sorted.masked.bam
+Number of references: 1
+Reference Name: KU501215.1
+Reference Length: 10675
+Using Region: KU501215.1
+Sorted By Coordinate
+Results:
+59022 reads were removed.
+[sorting resulting BAM] samtools sort WTF16PL_b.trimmed.sorted.masked.bam -o WTF16PL_b.trimmed.sorted.masked.sorted.bam
+[generating final TSV file] samtools mpileup -A -d 1000000 --reference ZIKV-PR.fasta -B -Q 0 WTF16PL_b.trimmed.sorted.masked.sorted.bam | ivar variants -p WTF16PL_b.SNV -t 0.03 -r ZIKV-PR.fasta -g GFF_FILE
+[mpileup] 1 samples in 1 input files
+GFF file is not in GFF3 file format!
+
+
+Part 4: Filtering the same SNVs from replicates
+
+
+[processing] WTF13PL
+[filtering SNVs across replicates] ivar filtervariants -p WTF13PL.SNV_final WTF13PL_a.SNV.tsv WTF13PL_b.SNV.tsv
+
+[processing] WTF16PL
+[filtering SNVs across replicates] ivar filtervariants -p WTF16PL.SNV_final WTF16PL_a.SNV.tsv WTF16PL_b.SNV.tsv
+[Sorting files to directories and renaming]
+Thu 17 Feb 2022 12:02:37 PM CET
+[FINISHED]
+user@localhost:~/Desktop/now2> 
