@@ -1,0 +1,9 @@
+##sequence-region FJ233905.1 1 1767
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=85708
+FJ233905.1	Genbank	region	1	1767	.	+	.	ID=FJ233905.1:1..1767;Dbxref=taxon:85708;Is_circular=true;collection-date=May-2008;country=Canada;gbkey=Src;genome=genomic;isolation-source=lung%3B tonsil;mol_type=genomic DNA;nat-host=Sus scrofa domesticus (domestic pig);old-name=Porcine circovirus type 2;strain=BaPCV2b
+FJ233905.1	Genbank	gene	51	995	.	+	.	ID=gene-rep;Name=rep;gbkey=Gene;gene=rep;gene_biotype=protein_coding
+FJ233905.1	Genbank	CDS	51	995	.	+	0	ID=cds-ACI62785.1;Parent=gene-rep;Dbxref=NCBI_GP:ACI62785.1;Name=ACI62785.1;gbkey=CDS;gene=rep;product=replicase;protein_id=ACI62785.1
+FJ233905.1	Genbank	CDS	357	671	.	-	0	ID=cds-ACI62787.1;Dbxref=NCBI_GP:ACI62787.1;Name=ACI62787.1;gbkey=CDS;product=ORF3;protein_id=ACI62787.1
+FJ233905.1	Genbank	gene	1033	1734	.	-	.	ID=gene-cap;Name=cap;gbkey=Gene;gene=cap;gene_biotype=protein_coding
+FJ233905.1	Genbank	CDS	1033	1734	.	-	0	ID=cds-ACI62786.1;Parent=gene-cap;Dbxref=NCBI_GP:ACI62786.1;Name=ACI62786.1;gbkey=CDS;gene=cap;product=capsid;protein_id=ACI62786.1
+
