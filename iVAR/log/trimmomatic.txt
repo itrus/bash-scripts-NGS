@@ -1,0 +1,19 @@
+user@localhost:~/Desktop/now> ./trimmomatic.sh 
+Thu 17 Feb 2022 10:14:19 AM CET
+
+[trimming] WT3
+java -jar /home/user/bin/Trimmomatic-0.39/trimmomatic-0.39.jar PE WT3_R1.test.fastq.gz WT3_R2.test.fastq.gz -baseout ./trimmed/WT3.fastq.gz ILLUMINACLIP:/home/user/bin/Trimmomatic-0.39/adapters/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:16
+TrimmomaticPE: Started with arguments:
+ WT3_R1.test.fastq.gz WT3_R2.test.fastq.gz -baseout ./trimmed/WT3.fastq.gz ILLUMINACLIP:/home/user/bin/Trimmomatic-0.39/adapters/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:16
+Multiple cores found: Using 4 threads
+Using templated Output files: ./trimmed/WT3_1P.fastq.gz ./trimmed/WT3_1U.fastq.gz ./trimmed/WT3_2P.fastq.gz ./trimmed/WT3_2U.fastq.gz
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
+Using Long Clipping Sequence: 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT'
+ILLUMINACLIP: Using 1 prefix pairs, 4 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Quality encoding detected as phred33
+Input Read Pairs: 100000 Both Surviving: 96911 (96.91%) Forward Only Surviving: 2440 (2.44%) Reverse Only Surviving: 310 (0.31%) Dropped: 339 (0.34%)
+TrimmomaticPE: Completed successfully
+Thu 17 Feb 2022 10:14:24 AM CET

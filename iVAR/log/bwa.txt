@@ -1,0 +1,31 @@
+user@localhost:~/Desktop/now2> ./bwa.sh 
+Thu 17 Feb 2022 10:43:33 AM CET
+[building index] 1.fas
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index 1.fas
+[main] Real time: 0.036 sec; CPU: 0.008 sec
+
+[mapping running for 1/1] WT3
+bwa mem -t 32 1.fas WT3_1P.fastq.gz WT3_2P.fastq.gz | samtools view -b -F 4 -F 2048 | samtools sort -o WT3.bam
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 193822 sequences (26330654 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 7322, 0, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (133, 169, 221)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 397)
+[M::mem_pestat] mean and std.dev: (180.99, 65.08)
+[M::mem_pestat] low and high boundaries for proper pairs: (1, 485)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 193822 reads in 8.691 CPU sec, 2.632 real sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa mem -t 32 1.fas WT3_1P.fastq.gz WT3_2P.fastq.gz
+[main] Real time: 3.280 sec; CPU: 9.150 sec
+Thu 17 Feb 2022 10:43:36 AM CET

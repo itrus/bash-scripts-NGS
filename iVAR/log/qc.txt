@@ -1,0 +1,59 @@
+user@localhost:~/Desktop/now> ./qc.sh 
+[running QC]
+
+Computers / CPU cores / Max jobs to run
+1:local / 4 / 2
+
+Computer:jobs running/jobs completed/%of started jobs/Average seconds to complete
+local:2/0/100%/0.0s Analysis complete for WT3_R2.test.fastq.gz
+Started analysis of WT3_R2.test.fastq.gz
+Approx 5% complete for WT3_R2.test.fastq.gz
+Approx 10% complete for WT3_R2.test.fastq.gz
+Approx 15% complete for WT3_R2.test.fastq.gz
+Approx 20% complete for WT3_R2.test.fastq.gz
+Approx 25% complete for WT3_R2.test.fastq.gz
+Approx 30% complete for WT3_R2.test.fastq.gz
+Approx 35% complete for WT3_R2.test.fastq.gz
+Approx 40% complete for WT3_R2.test.fastq.gz
+Approx 45% complete for WT3_R2.test.fastq.gz
+Approx 50% complete for WT3_R2.test.fastq.gz
+Approx 55% complete for WT3_R2.test.fastq.gz
+Approx 60% complete for WT3_R2.test.fastq.gz
+Approx 65% complete for WT3_R2.test.fastq.gz
+Approx 70% complete for WT3_R2.test.fastq.gz
+Approx 75% complete for WT3_R2.test.fastq.gz
+Approx 80% complete for WT3_R2.test.fastq.gz
+Approx 85% complete for WT3_R2.test.fastq.gz
+Approx 90% complete for WT3_R2.test.fastq.gz
+Approx 95% complete for WT3_R2.test.fastq.gz
+Approx 100% complete for WT3_R2.test.fastq.gz
+local:1/1/100%/4.0s Analysis complete for WT3_R1.test.fastq.gz
+Started analysis of WT3_R1.test.fastq.gz
+Approx 5% complete for WT3_R1.test.fastq.gz
+Approx 10% complete for WT3_R1.test.fastq.gz
+Approx 15% complete for WT3_R1.test.fastq.gz
+Approx 20% complete for WT3_R1.test.fastq.gz
+Approx 25% complete for WT3_R1.test.fastq.gz
+Approx 30% complete for WT3_R1.test.fastq.gz
+Approx 35% complete for WT3_R1.test.fastq.gz
+Approx 40% complete for WT3_R1.test.fastq.gz
+Approx 45% complete for WT3_R1.test.fastq.gz
+Approx 50% complete for WT3_R1.test.fastq.gz
+Approx 55% complete for WT3_R1.test.fastq.gz
+Approx 60% complete for WT3_R1.test.fastq.gz
+Approx 65% complete for WT3_R1.test.fastq.gz
+Approx 70% complete for WT3_R1.test.fastq.gz
+Approx 75% complete for WT3_R1.test.fastq.gz
+Approx 80% complete for WT3_R1.test.fastq.gz
+Approx 85% complete for WT3_R1.test.fastq.gz
+Approx 90% complete for WT3_R1.test.fastq.gz
+Approx 95% complete for WT3_R1.test.fastq.gz
+Approx 100% complete for WT3_R1.test.fastq.gz
+local:0/2/100%/2.0s 
+
+[processing] WT3_R1
+Reads, thousands: 100
+[processing] WT3_R2
+Reads, thousands: 100
+
+Total reads, thousands: 200
