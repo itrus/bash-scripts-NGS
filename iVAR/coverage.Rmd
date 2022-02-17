@@ -1,0 +1,94 @@
+---
+title: "Coverage parsing"
+author: "Ivan Trus"
+date: "2020-10-19"
+output:
+  html_document: default
+  pdf_document: default
+---
+Execution start time: *`r Sys.time()`*
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = TRUE,
+  warning = TRUE
+)
+library(vroom)
+library(reshape)
+```
+
+# Initialization of the script and data loading
+```{r init, message=FALSE}
+Filelist <- list.files(pattern = "*.txt")
+CountGenomes <- length(Filelist)
+Threshold <- 400
+
+# Defining functions
+ListGaps <- function(Gaps) {
+  Start <- append(Gaps[1], Gaps[which(diff(Gaps) > 1) + 1])
+  Start
+  End <- append(Gaps[which(diff(Gaps) > 1)], Gaps[length(Gaps)])
+  End
+  GapsSummary <- data.frame(Start, End)
+  colnames(GapsSummary) <- c("Start", "End")
+  return(GapsSummary)
+}
+
+Coverage <- vroom(Filelist, id = Filelist, col_names = "")
+Coverage <- Coverage[c(1, 3, 4)]
+colnames(Coverage)[1] <- "X1"
+Coverage <- t(cast(Coverage, X1 ~ X2, value.var = "X3"))
+colnames(Coverage) <- gsub(".txt", "", Filelist)
+GenomeLength <- length(Coverage[, 1])
+
+```
+
+* Current working directory: **`r getwd()`**
+* List of files to process: **`r Filelist`**
+* Total number of files: **`r CountGenomes`**
+* Threshold for coverage counting: **`r Threshold`** x
+* Genome length: **`r GenomeLength`** nt
+
+# Diagnostic data, chart and list of gaps for each sample
+```{r main}
+Results <- matrix(
+  nrow = CountGenomes, ncol = 3,
+  dimnames = list(1:CountGenomes, c(
+    "Sample", "Read depth, x", "Coverage, %"))
+)
+Results <- as.data.frame(Results)
+Results[, 1] <- colnames(Coverage)
+AllGaps <- NA
+
+summary(Coverage)
+
+for (i in 1:CountGenomes) {
+  Results[i, 2] <- round(mean(Coverage[, i]), digits = 4)
+  Results[i, 3] <- round(100 - sum(Coverage[, i] < Threshold) / GenomeLength * 100, digits = 4)
+
+  # We need to replace 0 with 1 to make it possible to be plotted fully on log scale
+  GapsForLogChart <- Coverage[, i]
+  GapsForLogChart[GapsForLogChart == 0] <- 1
+
+  if(max(GapsForLogChart) < Threshold) YaxisLimit <- Threshold else YaxisLimit <- max(GapsForLogChart)
+  plot(log10(GapsForLogChart),
+    type = "l", xlab = "Nucleotide position in the genome",
+    ylab = "Read depth (log10)", ylim = c(0, log10(YaxisLimit) * 1.05))
+  text(x = 0, y = 1.05 * log10(YaxisLimit), colnames(Coverage)[i], pos = 4, font = 2, cex = 1.2)
+  abline(h = log10(Threshold), col = "red", lwd = 3)
+  GapsPositions <- as.numeric(names(subset(Coverage[, i], Coverage[, i] < Threshold)))
+  AllGaps <- sort(c(AllGaps, setdiff(GapsPositions, AllGaps)))
+  print(paste("The list of gaps in", colnames(Coverage)[i], "with the depth less than", Threshold, "x"))
+  print(ListGaps(GapsPositions))
+}
+```
+
+# Summary on read depth and coverage
+```{r final}
+Results
+print(paste("Combined gaps with coverage depth less than", Threshold, "x."))
+print(ListGaps(AllGaps))
+print(paste("Intersection of coverage in all provided files:", round(100 - length(AllGaps) / GenomeLength * 100, digits = 4), "%"))
+```
+
+Execution end time: *`r Sys.time()`*
