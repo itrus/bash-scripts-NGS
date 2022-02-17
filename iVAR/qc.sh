@@ -1,10 +1,11 @@
 #!/bin/bash
+FOLDER=/home/user/bin/FastQC
 SEARCH_PATTERN='*.fastq.gz'
 
 TOTAL_FILES=`find ./ -maxdepth 1 -iname "*$SEARCH_PATTERN*" | wc -l`
 ARR=($(ls $SEARCH_PATTERN))
 echo "[running QC]"
-ls $SEARCH_PATTERN | parallel -j 4 --progress ~/bin/FastQC/fastqc {} 
+ls $SEARCH_PATTERN | parallel -j 4 --progress $FOLDER/fastqc {}
 printf "\n"
 for ((i=0; i<$TOTAL_FILES; i+=1)) {
     FILE_NAME=`echo ${ARR[$i]} | awk -F "." '{print $1}'`    
