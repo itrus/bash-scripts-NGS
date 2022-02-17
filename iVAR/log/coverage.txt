@@ -1,0 +1,26 @@
+ivan@T420:~/Downloads$ find ./ -iname '*.bam' | parallel -j 4 --progress 'bedtools bamtobed -i {} > {.}.bed | echo {/}'
+
+Computers / CPU cores / Max jobs to run
+1:local / 4 / 4
+
+Computer:jobs running/jobs completed/%of started jobs/Average seconds to complete
+local:4/0/100%/0.0s 313-8F-F15_3.bam
+local:4/1/100%/7.0s 313-8F-F12_3.bam
+local:4/2/100%/3.5s 313-8F-F12_2.bam
+local:4/3/100%/3.0s 313-8F-F15_2.bam
+local:4/4/100%/2.8s PF-NS1-posK_2.bam
+local:4/5/100%/2.6s PF-NS1-posK_3.bam
+local:4/6/100%/2.3s 313-8F-F14_3.bam
+local:3/7/100%/2.0s 313-8F-F13_3.bam
+local:2/8/100%/2.1s 313-8F-F14_2.bam
+local:1/9/100%/1.9s 313-8F-F13_2.bam
+local:0/10/100%/1.7s 
+ivan@T420:~/Downloads$ find ./ -iname '*.bed' | parallel -j 4 --progress 'bedtools genomecov -d -i {} -g ZIKV-PR.genome  > {.}.txt'
+
+Computers / CPU cores / Max jobs to run
+1:local / 4 / 4
+
+Computer:jobs running/jobs completed/%of started jobs/Average seconds to complete
+local:0/10/100%/0.4s 
+ivan@T420:~/Downloads$ 
+
