@@ -156,7 +156,7 @@ find ./ -iname '*.bed' | parallel -j 4 --progress 'bedtools genomecov -d -i {} -
 ## 7 Merging BAM files representing one sample but pool #1 and pool #2
 Do this step when DNA representing the whole ZIKV or PCV2 genome was amplified with two different primer pools (see materials and methods for PrimalSeq NGS) and was not mixed during NGS library preparation. If pools were mixed, each biological sample is represented by only one BAM file and merging is not required. Pools are not the same as technical replicates.
 1. Rename all files manually. E.g. for Pool #1 and Pool #2: files 4A.bam and 5A.bam should be renamed to 4A.bam and 4A_5A.bam.
-2. The script merge.sh processes a pair of files at once. Thus, temporarily remove singlets (negative control samples represented by pool #1 or pool #2 only) to a separate folder.
+2. The script mergeBAMs.sh processes a pair of files at once. Thus, temporarily remove singlets (negative control samples represented by pool #1 or pool #2 only) to a separate folder.
 3. Calculate coverage after merging exactly as in step 6.
 
 ## 8 iVAR processing
@@ -176,11 +176,11 @@ Place in one directory:
    - To make GFF file, go to Genbank and find your reference genome (KU501215.1 for ZIKV). Export GFF file: **Send to: > Complete Record > Choose Destination: File > Format: GFF3 > Create file**
    - Do not pay attention to the message "_GFF file is not in GFF3 file format!_" in the final iVar output. According to iVar author (https://github.com/andersen-lab/ivar/issues/23): _The GFF3 file from NCBI has 4 lines starting with #! and those lines are showing the error. It's a simple fix and this should be done for next release. Irrespective of that though, ivar should proceed with translation as expected._
    - Note: Be very cautious because GFF works with ZIKV but did not work with PCV2. In PCV2 genome ORF2 is transcribed in reverse direction and GFF gives misleading positions for AA. Be careful working with viruses with genomes different from flaviviruses; for correct identification of AA positions use the manual method. 
-6. ivar-run.sh script
+6. run-ivar.sh script
    - Input files are mentioned in the header of the file. Check the filenames carefully. If you have different ones then edit the script accordingly.
    - The THRESHOLD parameter in the header of the file has a default setting of 3% (0.03). It stands for the minimal level of SNV prevalence in both replicates that will be reported. You may re-run iVAR for positive control or all samples after decreasing the mutation detection threshold from 3% (0.03) to 0.01% (0.0001). Check the resulting file representing the control (virus stock or inoculum) with the threshold of 0.1% for the mutations detected in your samples with the threshold of 3%. You may use reference values for your equipment to assess the importance of the detected mutations in the positive control stock/inoculum. For Illumina Miseq, company states for 0.1% (doi: 10.1111/j.1755-0998.2011.03024.x), while researchers report 0.24% (doi: 10.1038/s41598-018-29325-6) and 0.30-0.46% (doi: 10.1186/gb-2013-14-5-r51) as an error rate.
 
-Execute the ivar-run.sh script that goes through the following steps:
+Execute the run-ivar.sh script that goes through the following steps:
 1. Creating the main BAM file with primers. Creating the main BED file with primers.
 2. Counting and processing BAM files with replicates of sample reads one by one. BAM file with primers is not counted and is not processed in this pipeline.
    - Making index.
