@@ -1,0 +1,26 @@
+user@localhost:~/Desktop/now2> ./index.sh 
+Mon 14 Feb 2022 09:58:59 AM CET
+
+[build] loading fasta file Homo_sapiens.GRCh38.cdna.all.fa.gz
+[build] k-mer length: 31
+[build] warning: clipped off poly-A tail (longer than 10)
+        from 1544 target sequences
+[build] warning: replaced 100005 non-ACGUT characters in the input sequence
+        with pseudorandom nucleotides
+[build] counting k-mers ... done.
+[build] building target de Bruijn graph ...  done 
+[build] creating equivalence classes ...  done
+[build] target de Bruijn graph has 1225213 contigs and contains 115705407 k-mers 
+
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+#[inspect] Index version number = 10
+#[inspect] k = 31
+#[inspect] number of targets = 202897
+#[inspect] number of equivalence classes = 834139
+#[inspect] number of contigs = 1225213
+#[inspect] Number of k-mers in index = 115705407
+Warning: 60073 transcripts were defined in GTF file, but not in the index
+Mon 14 Feb 2022 10:06:17 AM CET 
