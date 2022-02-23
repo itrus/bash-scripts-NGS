@@ -104,11 +104,11 @@ Use the corresponding folder to save the results (screenshots).
 
 Alternatively, you can download and process FASTQ.GZ files with FastQC.
 1. Download FastQC (https://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc) and unpack it to /home/user/bin.
-2. Run qc.sh script.
+2. Run /main/qc.sh script.
 
 ## 4 Trimmomatic
 
-Copy-paste to a new working folder FASTQ.GZ files containing paired reads and trimmomatic.sh script. Launch the script to proceed with Trimmomatic.
+Copy-paste to a new working folder FASTQ.GZ files containing paired reads and /main/trimmomatic.sh script. Launch the script to proceed with Trimmomatic.
 - This workflow is only valid for the paired-ended reads (PE). You cannot use it for single-ended (SE) reads.
 - Default workflow parameters: ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36. Adapt it in the trimmomatic.sh script if necessary.
 - Illimina HiSeq is using Phred33 quality scores and needs TruSeq3-PE-2.fa file from the Trimmomatic package for removing adaptors. Input files for adaptors may vary depending on the machine, etc. Check it each time.
@@ -127,7 +127,7 @@ Provide a file representing the reference for the alignment.
   - For example, for PhiX control use the Illumina website (https://support.illumina.com/sequencing/sequencing_software/igenome.html). Genbank has the PhiX sequence [Genbank: NC_001422.1 that is 5 nt different from the Illumina’s one.
    - For the PR strain of ZIKV I downloaded FASTA file (ZIKV-PR.fasta) from the Genbank [Genbank: KU501215.1].
    - For the BaPCV2b strain of PCV2 I downloaded FASTA file (BaPCV2b.fasta) from the Genbank [Genbank: FJ233905.1].
-- Run bwa.sh script to align paired reads to the reference. First index files for the reference genome will be created. Then as the resulting output sorted and merged BAM file named as <SAMPLE>.BAM will be created. Unmapped reads are skipped (“F” parameter). After successfully run, delete the copy-pasted input FASTQ.GZ files to save the space and other tiny files (e.g. index), but keep the generated output (BAM file) and logging information from the shell/terminal.
+- Run /main/bwa.sh script to align paired reads to the reference. First index files for the reference genome will be created. Then as the resulting output sorted and merged BAM file named as <SAMPLE>.BAM will be created. Unmapped reads are skipped (“F” parameter). After successfully run, delete the copy-pasted input FASTQ.GZ files to save the space and other tiny files (e.g. index), but keep the generated output (BAM file) and logging information from the shell/terminal.
 
 ## 6 Coverage analysis
 ### 6.1 UGENE
@@ -148,7 +148,7 @@ awk {'printf $1 "\t" $2'} $INDEX.fai > $INDEX.genome
 find ./ -iname '*.bam' | parallel -j 4 --progress 'bedtools bamtobed -i {} > {.}.bed | echo {/}'
 find ./ -iname '*.bed' | parallel -j 4 --progress 'bedtools genomecov -d -i {} -g ZIKV-PR.fasta.genome > {.}.txt'
 ```
-3. Place the R script (coverage.Rmd) and TXT files with coverages in a separate (new) directory. Make sure that only the relevant TXT files were placed in this folder. Analyse resulting files with the coverage.Rmd R script.
+3. Place the R script (/main/coverage.Rmd) and TXT files with coverages in a separate (new) directory. Make sure that only the relevant TXT files were placed in this folder. Analyse resulting files with the coverage.Rmd R script.
    - Open and run the R script with RStudio.
    - Use **Code > Run Region > Run All (Control+Alt+R)** if you want to see results in RStudio.
    - Use **File > Knit Document** if you need a report (HTML file) generated. This file can be opened with any web browser. To create a report in PDF file format, you need first to install the LaTeX distribution. 
