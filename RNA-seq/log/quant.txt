@@ -1,0 +1,121 @@
+user@localhost:~/Desktop/now2> cd ..
+user@localhost:~/Desktop> cd temp/
+user@localhost:~/Desktop/temp> ./
+homo105.idx                     RBD2_1P.fastq.gz                WT2_1P.fastq.gz
+Homo_sapiens.GRCh38.105.gtf.gz  RBD2_2P.fastq.gz                WT2_2P.fastq.gz
+log.txt                         RBD3_1P.fastq.gz                WT3_1P.fastq.gz
+quant.sh                        RBD3_2P.fastq.gz                WT3_2P.fastq.gz
+RBD1_1P.fastq.gz                WT1_1P.fastq.gz                 
+RBD1_2P.fastq.gz                WT1_2P.fastq.gz                 
+user@localhost:~/Desktop/temp> ./quant.sh 
+Mon 14 Feb 2022 10:54:58 AM CET
+
+[processing] RBD1
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o RBD1 RBD1_1P.fastq.gz RBD1_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: RBD1_1P.fastq.gz
+                             RBD1_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 25,545,904 reads, 9,670,710 reads pseudoaligned
+[quant] estimated average fragment length: 170.338
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,219 rounds
+
+
+[processing] RBD2
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o RBD2 RBD2_1P.fastq.gz RBD2_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: RBD2_1P.fastq.gz
+                             RBD2_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 18,355,024 reads, 7,281,385 reads pseudoaligned
+[quant] estimated average fragment length: 179.379
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,143 rounds
+
+
+[processing] RBD3
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o RBD3 RBD3_1P.fastq.gz RBD3_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: RBD3_1P.fastq.gz
+                             RBD3_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 27,709,159 reads, 10,792,415 reads pseudoaligned
+[quant] estimated average fragment length: 187.895
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,260 rounds
+
+
+[processing] WT1
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o WT1 WT1_1P.fastq.gz WT1_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: WT1_1P.fastq.gz
+                             WT1_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 19,122,442 reads, 7,616,311 reads pseudoaligned
+[quant] estimated average fragment length: 215.027
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,134 rounds
+
+
+[processing] WT2
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o WT2 WT2_1P.fastq.gz WT2_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: WT2_1P.fastq.gz
+                             WT2_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 19,913,830 reads, 7,399,093 reads pseudoaligned
+[quant] estimated average fragment length: 204.981
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,090 rounds
+
+
+[processing] WT3
+/home/user/bin/kallisto/kallisto quant -i homo105.idx -g Homo_sapiens.GRCh38.105.gtf.gz -t 4 -o WT3 WT3_1P.fastq.gz WT3_2P.fastq.gz
+
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 202,897
+[index] number of k-mers: 115,705,407
+[index] number of equivalence classes: 834,139
+[quant] running in paired-end mode
+[quant] will process pair 1: WT3_1P.fastq.gz
+                             WT3_2P.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] processed 19,150,508 reads, 7,129,667 reads pseudoaligned
+[quant] estimated average fragment length: 177.101
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,182 rounds
+
+Mon 14 Feb 2022 11:45:45 AM CET
+user@localhost:~/Desktop/temp> 
