@@ -2,91 +2,90 @@
 ## 1 SUMMARY
 This manual describes the bioinformatics to identify DEGs (differentially expressed genes) and affected GOs (gene ontology pathways) in RNA-seq data. For training purposes, starting files are SRA files downloaded from the SRA database. In the first step they are converted to FASTQ.GZ files (Figure 1).
 
-
+![rna-seq](https://user-images.githubusercontent.com/9166776/155319981-02d5fe89-bb44-4a98-b552-8a2cbfdfbd40.png)
+Figure 1. Processing pathway.
 
 If your starting data are paired-end reads from illumina NGS and contain adaptor sequences, please process your data with Trimmomatic to remove the adaptors (see Apendix). And then proceed to Kallisto analysis. If your starting data is made of single-end reads, the Kallisto Quantify transcripts (see below, 5.2) should be adjusted. Because Kallisto is expecting to get two FASTQ files for each sample/animal, while single-reads will give only one per sample.
 In general, Kallisto is (a) making index for porcine genome (Sus scrofa, version 11.1) and (b) counting transcripts. In the next step, the R-script is downloading from BioMart the database of gene names corresponding to your transcripts . Then another R script is performing analysis of DEGs and GO pathways based on existing experimental factors/treatments/groups.
 There are two R scripts in the pipeline. The first script has one parameter that may be edited: reference genome used for the whole analysis. In the second script, adjustments will depend on experimental factors/treatments taken into analysis. 
- 
-Figure 1. Processing pathway.
-2	PREREQUISITES
+
+## 2 PREREQUISITES
 You will need a Linux machine for data preprocessing. Final analysis is done in the R environment (R-Studio) in Windows or Linux.
 Run all commands in the console/terminal/shell (Show Applications button in the lowest left corner > Search for “Terminal” or “Konsole”). Configure your Linux shell. Go to the Terminal preferences > Unnamed profile > Scrolling > Remove the checkmark from “Limit scrollback to ...”.
 For running each command, you need to enter the proper directory. For example, if you need to use the directory /home/ngs1/temporary. To enter it with terminal, execute the following command:
+```
 cd /home/ngs1/temporary
+```
 After running each command:
-o	If several commands were copy-pasted, check that the last command was executed. If not, press Enter to launch the last command.
-o	Read all output to check if it was finished without error messages.
-o	Copy-paste the output of the terminal session to a proper file (log.txt) and save it in the working folder for the current procedure.
+If several commands were copy-pasted, check that the last command was executed. If not, press Enter to launch the last command.
+- Read all output to check if it was finished without error messages.
+- Copy-paste the output of the terminal session to a proper file (log.txt) and save it in the working folder for the current procedure.
 For each analysis step you need an empty working directory. Bring input files, then after successful processing delete input files, but leave all newly created files (results) and reference files (e.g. IDX-files, etc.). This allows to go back and to repeat any step starting with any initial point. Besides this, it comes possible to investigate differences between files created under different parameters/conditions.
-Create subfolders required for storing results of each procedure:
-Step	Subfolder for storing analysis results	Comments
-# of the section in this SOP	Name		
-4	Raw data	/0 raw data	
-na	Working directory for temporary files	/temp	
-5.1	Index for the reference genome	/1 index	
-5.2	Results from Kallisto	/2 kallisto	
-6.1	Initial (basic) R procedures	/3 Rmain	
-6.2	Final R procedures	/4 Rmodel	
-7	Cytoscape + EnrichmentMap	/5 EM	
-3	PREPARE THE LINUX ENVIRONMENT
-First install all require dependencies:
+- Create subfolders required for storing results of each procedure.
+
+## 3 PREPARE THE LINUX ENVIRONMENT
+First install all the require dependencies:
+```
 sudo apt autoremove
 sudo apt install parallel gawk gzip default-jre
-During installation, machine will ask a password; the password on our Linux machine: zika2020.
+```
+During installation, machine will ask admin's password.
 Depending from machine and changes in packages, it is possible that other installations, e.g., other packages and new version of R, will be required.
-Copy-paste commands from Word to Konsole not always work (e.g., if there are invisible symbols from Word). If Konsole gives strange message – e.g., tar invalid option –“^” – then retype the same comman manually.
+Copy-paste commands from Word to Konsole doesn't always work (e.g., if there are invisible symbols from Word). If Konsole gives strange message – e.g., tar invalid option –“^” – then retype the same comman manually.
 
-Make sure you have late or latest R (version 4.0.3 on 201010). Execute command version in your R or RStudio command prompt to get your current version. To manually reinstall R execute: 
+Make sure you have the latest version of R. To manually reinstall R execute: 
+```
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-core r-recommended r-base-dev
-
-Install the SRA Toolkit to work with SRA files (This step is necessary if RNA-seq data from SRA are used, e.g., for training or re-analysis of published dat. In a new experiment, raw files will come directly from the illumina machine):
-o	200913; version 2.10.8; 93 Mb (or newer version)
-o	https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software
-o	the file is called “Ubuntu Linux 64 bit architecture”; download it.
-•	Unpack it
+```
+Install the SRA Toolkit to work with SRA files (This step is necessary if RNA-seq data from the SRA database are used, e.g., for training or re-analysis of published dat. In a new experiment, raw files will come directly from the illumina machine). To install the SRA Toolkit:
+1.	Go to https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software and download	the file called “Ubuntu Linux 64 bit architecture”.
+2. Unpack it
+```
 tar –xzf sratoolkit.2.10.8-ubuntu64.tar.gz
-•	The highlighted file name should be changed accordingly for different versions.
-•	Move a directory with unpacked sratoolkit into ~/soft (symbol “~” stands for your home directory. E.g. /home/ngs1/)
-•	Check if it works well.
-~/soft/sratoolkit.2.10.8-ubuntu64/bin/prefetch -V
+```
+3. Move a directory with unpacked sratoolkit into ~/bin (symbol “~” stands for your home directory. E.g. /home/user/)
+4. Check if it works well.
+```
+~/bin/sratoolkit.2.10.8-ubuntu64/bin/prefetch -V
+```
 
 Install Kallisto:
-•	Complete manual
-o	https://pachterlab.github.io/kallisto/manual
-o	https://pachterlab.github.io/kallisto/starting
-•	Download it 
-http://pachterlab.github.io/kallisto/download 
-
-Click on the latest release for Linux
-
-•	Unpack it
+1.	Download it from http://pachterlab.github.io/kallisto/download 
+2. Unpack it
+```
 tar -xvf kallisto_linux-v0.46.1.tar.gz
-•	Change the highlighted name, if necessary
-•	Move it to ~/soft
-•	Test it
-~/soft/kallisto/kallisto
+```
+3. Move it to ~/bin
+4. Test it
+```
+~/bin/kallisto/kallisto
+```
 
 Install Cytoscape with the required plugins:
-1.	Download Cytoscape (https://cytoscape.org/download.html; 265 Mb; v.3.8.1 or latest one).
-2.	Run commands to lunch the installer.
+1. Download Cytoscape (https://cytoscape.org/download.html).
+2. Run commands to lunch the installer.
+```
 chmod +x Cytoscape_3_8_1_unix.sh
 ./Cytoscape_3_8_1_unix.sh
-3.	Change the highlighted name if other versions are used. 
+```
 4.	Follow the dialog: accept everything and select the pathway for the program.
 5.	Launch it using the icon on the Desktop.
 6.	Install several plug-ins.
-a.	Apps > App manager
-b.	Install 4 plug-ins: “EnrichmentMap”, “clusterMaker2”, “WordCloud”, “AutoAnnotate” or 4-in-1 plug-in “EnrichmentMap Pipeline Collection”.
+   - **Apps > App manager**
+   - Install 4 plug-ins: “EnrichmentMap”, “clusterMaker2”, “WordCloud”, “AutoAnnotate” or 4-in-1 plug-in “EnrichmentMap Pipeline Collection”.
+
 Cytoscape analysis can be done in Windows. Use the same link (in Windows it will automatically download the Windows version) and follow the same instructions.
-4	MAKING FASTQ.GZ, ACCESSION LIST, AND METADATA FILES
-4.1	Download the Accession list – this section is for training/re-analyzing of publicly available data (see 4.3 for new data)
+
+## 4 MAKING FASTQ.GZ, ACCESSION LIST, AND METADATA FILES
+### 4.1 Download the Accession list – this section is for training/re-analyzing of publicly available data (see 4.3 for new data)
 To make the Accession list with all of the samples visit the SRA Run Selector (https://trace.ncbi.nlm.nih.gov/Traces/study/?) and use the correct accession number for your study to find the page in the database with all the samples. E.g. use:
-PRJNA407675 for 17-1. Pigs model ZIKV - EBioMedice – our first RNA-seq study
-PRJNA573521 for 19-1. Subclinical ZIKV - PLOSPath- our second RNA-seq study
+- PRJNA407675 for 17-1. Pigs model ZIKV - 
+
+– our first RNA-seq study
+- PRJNA573521 for 19-1. Subclinical ZIKV - PLOSPath- our second RNA-seq study
 Go to Select tab. Then find the line with all samples (Total) and column with download links (Download). Download Accession List with all the samples (SraAccList.txt). Download also Metadata with data on the experiment setup and factors (SraRunTable.txt). This file will be necessary at step 6.1 for sample, group and factors identification.
 4.2	Download and process SRA files – this section is for training/re-analyzing of publicly available data (see 4.3 for new data)
 This protocol is for paired reads only. As soon as we have paired reads, two FASTQ.GZ files are generated from each SRA file.
@@ -150,7 +149,8 @@ for ((i=0; i<$TOTAL_FILES; i+=2))
 }
 date
 3.	Resulting output is sorted in several directories (one directory for each sample). Do not rename directories or files. Do not move files to a single directory. Preserving the original arrangement is important for proper import with tximport in the following R-script analysis.
-a.	JSON file with run information
+
+  a.	JSON file with run information
 b.	H5 file with binary data on transcript abundance in HDF5 file format
 c.	TSV file with plain-text information on transcript abundance
 6	ANALYSIS IN R
