@@ -1,0 +1,7 @@
+sample_id,treatment
+RBD1,RBD
+RBD2,RBD
+RBD3,RBD
+WT1,control
+WT2,control
+WT3,control
