@@ -1,7 +1,7 @@
 ---
-title: "RNA-Seq1"
+title: "RNA-Seq. Initial script"
 author: "Ivan Trus"
-date: "2021-07-16"
+date: "2022-02-23"
 output: html_document
 ---
 # Initialization
@@ -40,6 +40,9 @@ library(rhdf5)
 ```{r importing Transcripts database}
 ## This block creates database of Genes and transcripts. It will be created once and loaded later in the next R script. Comment this block and uncoment the line below it to load the previosly created Tx2Gen.Rdata file.
 SearchString <- "GRCh38.p13"
+
+DT::datatable(searchDatasets(mart = useMart("ensembl")), caption = "Available genomes")
+searchDatasets(mart = useMart("ensembl"))
 SearchString %>% searchDatasets(mart = useMart("ensembl"), pattern = .) %>% print
 SearchString %>% searchDatasets(mart = useMart("ensembl"), pattern = .) %>%
   .[1] %>% as.character %>%
