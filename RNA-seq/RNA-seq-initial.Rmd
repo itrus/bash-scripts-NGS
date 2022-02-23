@@ -1,0 +1,140 @@
+---
+title: "RNA-Seq1"
+author: "Ivan Trus"
+date: "2021-07-16"
+output: html_document
+---
+# Initialization
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = TRUE,
+	warning = TRUE
+)
+StartTime <- Sys.time()
+
+library(magrittr)
+library(dplyr)
+library(janitor)
+library(readr)
+library(RColorBrewer)
+library(DT)
+
+# installing required Bioconductor packages
+# uncomment these lines and run them once if you still don't have these required packages
+# install.packages("BiocManager")
+# BiocManager::install("biomaRt")
+# BiocManager::install("tximport")
+# BiocManager::install("edgeR")
+# BiocManager::install("limma")
+# BiocManager::install("rhdf5")
+
+library(biomaRt)
+library(tximport)
+library(edgeR)
+library(rhdf5)
+```
+
+# Importing Data from BioMART
+```{r importing Transcripts database}
+## This block creates database of Genes and transcripts. It will be created once and loaded later in the next R script. Comment this block and uncoment the line below it to load the previosly created Tx2Gen.Rdata file.
+SearchString <- "GRCh38.p13"
+SearchString %>% searchDatasets(mart = useMart("ensembl"), pattern = .) %>% print
+SearchString %>% searchDatasets(mart = useMart("ensembl"), pattern = .) %>%
+  .[1] %>% as.character %>%
+  useMart(biomart = "ENSEMBL_MART_ENSEMBL", dataset = ., host = "useast.ensembl.org") %>%
+  getBM(attributes = c("ensembl_transcript_id", "transcript_version",
+                     "ensembl_gene_id", "external_gene_name",
+                     "description", "transcript_biotype"), mart = .) -> Tx2Gen
+saveRDS(Tx2Gen, "Tx2Gen.Rdata")
+#Tx2Gen <- readRDS("Tx2Gen.Rdata")
+
+Tx2Gen[, c(1, 3, 4)] %>%
+  rename(
+    target_id = ensembl_transcript_id,
+    ens_gene = ensembl_gene_id,
+    ext_gene = external_gene_name
+  ) -> Tx2GenForTxImport
+```
+
+# Importing Kallisto results
+```{r importing reads}
+# importing Kallisto results
+# Important! no extra files should be in the belowmentioned folder
+FolderWithKallistoData <- "kallisto"
+SampleId <- dir(FolderWithKallistoData)
+Files <- file.path(FolderWithKallistoData, SampleId, "abundance.h5")
+names(Files) <- SampleId
+KallistoData <- tximport(Files,
+  type = "kallisto", tx2gene = Tx2GenForTxImport[, 1:2],
+  ignoreTxVersion = T
+)
+print(paste(length(Files), "files loaded"))
+summary(KallistoData$counts)
+
+# Combining IDs from Kallisto and ENSEMBL
+GeneExpression <- DGEList(KallistoData$counts)
+GeneExpression %>%
+  rownames() %>%
+  as.data.frame() -> GeneId
+names(GeneId) <- "GeneId"
+merge(GeneId, distinct(Tx2Gen[, c(3:6)], ensembl_gene_id, .keep_all = T),
+      by.x = "GeneId", by.y = "ensembl_gene_id", all.x = T) -> Genes
+rownames(Genes) <- Genes$GeneId
+GeneExpression$genes <- Genes
+```
+
+
+# Cleaning the dataset
+```{r Cleaning the dataset}
+# Transformation to CPM and deleting low CPM genes
+CopiesPerMillion <- cpm(GeneExpression, log = F)
+print(paste(dim(GeneExpression)[1], "genes in total"))
+nsamples <- ncol(CopiesPerMillion)
+a <- brewer.pal(nsamples, "Paired")
+par(mfrow=c(1,2))
+
+plot(CopiesPerMillion %>% log2 %>% density, col = a[1], lwd = 2,
+     ylim = c(0, 0.25), xlim = c(-5, 10), main = "CPM before cut-off", xlab = "CPM, log2")
+abline(v = log2(1), lty = 3)
+for (i in 2:nsamples){
+  b <- density(log2(CopiesPerMillion[, i]))
+  lines(b$x, b$y, col = a[i], lwd = 2)
+}
+#legend("topleft", GeneExpression$samples$sample_name, text.col=col, bty="n",
+#       cex = 0.5, text.font = 2)
+
+## We keep Genes with >1 CPM in at least 3 samples
+GeneExpression <- GeneExpression[rowSums(CopiesPerMillion > 1) >= 3, keep.lib.sizes = F]
+print(paste(dim(GeneExpression)[1], "genes with >1 CPM in at least 3 samples"))
+
+CopiesPerMillion <- cpm(GeneExpression, log = F)
+
+plot(CopiesPerMillion %>% log2 %>% density, col = a[1], lwd = 2,
+     ylim = c(0, 0.25), xlim = c(-5, 10), main = "CPM after cut-off", xlab = "CPM, log2")
+abline(v = log2(1), lty = 3)
+for (i in 2:nsamples){
+  b <- density(log2(CopiesPerMillion[, i]))
+  lines(b$x, b$y, col = a[i], lwd = 2)
+}
+#legend("topleft", GeneExpression$samples$sample_name, text.col=col, bty="n",
+#       cex = 0.5, text.font = 2)
+
+rm(a, b, i)
+```
+
+# Attaching the table with Metadata
+```{r meta}
+# adding factors
+CurrentFactors <- read.csv("RunTable.txt", sep = ",") %>% clean_names()
+GeneExpression$samples <- cbind(GeneExpression$samples, CurrentFactors)
+
+DT::datatable(as.data.frame(GeneExpression$samples),
+  caption = "Samples Metadata", options = list(pageLength = 100))
+
+# Saving the full dataset
+saveRDS(GeneExpression, paste0("GE.Rdata"))
+```
+**Execution start time:** *`r StartTime`*  
+**Execution end time  :** *`r Sys.time()`*
