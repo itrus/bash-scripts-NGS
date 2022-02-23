@@ -11,7 +11,7 @@ In general, Kallisto is (a) making index for porcine genome (Sus scrofa, version
 There are two R scripts in the pipeline. The first script has one parameter that may be edited: reference genome used for the whole analysis. In the second script, adjustments will depend on experimental factors/treatments taken into analysis. 
 
 ## 2 PREREQUISITES
-You will need a Linux machine for data preprocessing. Final analysis is done in the R environment (R-Studio) in Windows or Linux.
+You will need a Linux machine for data preprocessing (preferrably Ubuntu-based one). Final analysis is done in the R environment (R-Studio) in Windows or Linux.
 Run all commands in the console/terminal/shell (Show Applications button in the lowest left corner > Search for “Terminal” or “Konsole”). Configure your Linux shell. Go to the Terminal preferences > Unnamed profile > Scrolling > Remove the checkmark from “Limit scrollback to ...”.
 For running each command, you need to enter the proper directory. For example, if you need to use the directory /home/ngs1/temporary. To enter it with terminal, execute the following command:
 ```
@@ -34,6 +34,9 @@ During installation, machine will ask admin's password.
 Depending from machine and changes in packages, it is possible that other installations, e.g., other packages and new version of R, will be required.
 Copy-paste commands from Word to Konsole doesn't always work (e.g., if there are invisible symbols from Word). If Konsole gives strange message – e.g., tar invalid option –“^” – then retype the same comman manually.
 
+### R and RStudio
+To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (**Right mouse button > Open With Software Install > Install**)
+
 Make sure you have the latest version of R. To manually reinstall R execute: 
 ```
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
@@ -41,8 +44,12 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD
 sudo apt update
 sudo apt install r-base r-base-core r-recommended r-base-dev
 ```
+
+To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (**Right mouse button > Open With Software Install > Install**)
+
+### SRA toolkit
 Install the SRA Toolkit to work with SRA files (This step is necessary if RNA-seq data from the SRA database are used, e.g., for training or re-analysis of published dat. In a new experiment, raw files will come directly from the illumina machine). To install the SRA Toolkit:
-1.	Go to https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software and download	the file called “Ubuntu Linux 64 bit architecture”.
+1. Go to https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software and download	the file called “Ubuntu Linux 64 bit architecture”.
 2. Unpack it
 ```
 tar –xzf sratoolkit.2.10.8-ubuntu64.tar.gz
@@ -53,8 +60,9 @@ tar –xzf sratoolkit.2.10.8-ubuntu64.tar.gz
 ~/bin/sratoolkit.2.10.8-ubuntu64/bin/prefetch -V
 ```
 
+### Kallisto
 Install Kallisto:
-1.	Download it from http://pachterlab.github.io/kallisto/download 
+1. Download it from http://pachterlab.github.io/kallisto/download 
 2. Unpack it
 ```
 tar -xvf kallisto_linux-v0.46.1.tar.gz
@@ -65,6 +73,7 @@ tar -xvf kallisto_linux-v0.46.1.tar.gz
 ~/bin/kallisto/kallisto
 ```
 
+### Cytoscape
 Install Cytoscape with the required plugins:
 1. Download Cytoscape (https://cytoscape.org/download.html).
 2. Run commands to lunch the installer.
@@ -72,9 +81,9 @@ Install Cytoscape with the required plugins:
 chmod +x Cytoscape_3_8_1_unix.sh
 ./Cytoscape_3_8_1_unix.sh
 ```
-4.	Follow the dialog: accept everything and select the pathway for the program.
-5.	Launch it using the icon on the Desktop.
-6.	Install several plug-ins.
+4. Follow the dialog: accept everything and select the pathway for the program.
+5. Launch it using the icon on the Desktop.
+6. Install several plug-ins.
    - **Apps > App manager**
    - Install 4 plug-ins: “EnrichmentMap”, “clusterMaker2”, “WordCloud”, “AutoAnnotate” or 4-in-1 plug-in “EnrichmentMap Pipeline Collection”.
 
@@ -118,7 +127,7 @@ In this experiment, we use the pig (_Sus scrofa_) reference genome. Download the
    - This is an important step! Get the correct reference. And starting from this step and until the end of this protocol work with only one reference genome at a time. There are plenty of different pig breeds sequenced and they are being updated regularly. Stay with only one reference genome within one experiment.
    - E.g. for getting porcine genome (Sscrofa11.1) visit http://uswest.ensembl.org/Sus_scrofa/Info/Index?db=core, click **Download FASTA**, click **cdna**, and download corresponding cDNA, e.g.,  _Sus_scrofa.Sscrofa11.1.cdna.all.fa.gz_ . Visit http://uswest.ensembl.org/Sus_scrofa/Info/Index?db=core, click **Download GTF**, and download corresponding GTF file, e.g.,  _Sus_scrofa.Sscrofa11.1.101.gtf.gz_ .
    - E.g. for the recent human genome, visit http://www.ensembl.org/Homo_sapiens/Info/Index, , click **Download FASTA**, click **cdna**, and download corresponding cDNA, e.g.,  _Homo_sapiens.GRCh38.cdna.all.fa.gz_ . Visit http://uswest.ensembl.org/Sus_scrofa/Info/Index?db=core, click **Download GTF**, and download corresponding GTF file, e.g.,  _Homo_sapiens.GRCh38.105.gtf.gz_ .
-2.	Make index for the genome (IDX file) from downloaded cDNA file and validate it with GTF file wih the **index.sh** script. This is a fast process. It takes ~5 minutes. Check the header of the script and modify the header lines with filenames if necessary. BED and IDX files will be created. You need only the IDX file to continue.
+2. Make index for the genome (IDX file) from downloaded cDNA file and validate it with GTF file wih the **index.sh** script. This is a fast process. It takes ~5 minutes. Check the header of the script and modify the header lines with filenames if necessary. BED and IDX files will be created. You need only the IDX file to continue.
 
 ### 5.2 Quantify the transcripts
 1. Bring to a new directory
@@ -126,8 +135,8 @@ In this experiment, we use the pig (_Sus scrofa_) reference genome. Download the
    - Index file
    - GTF file
    - the **quant.sh** script. Modify filenames in the header of the file if necessary.
-2.	Execute the **quant.sh** script. The process goes relatively fast (11.6 Gb/h).
-3.	Resulting output is sorted in several directories (one directory for each sample). Do not rename directories or files. Do not move files to a single directory. Preserving the original file arrangement is important for proper import with **tximport** in the following analysis with the R script.
+2. Execute the **quant.sh** script. The process goes relatively fast (11.6 Gb/h).
+3. Resulting output is sorted in several directories (one directory for each sample). Do not rename directories or files. Do not move files to a single directory. Preserving the original file arrangement is important for proper import with **tximport** in the following analysis with the R script.
    - JSON file with run information
    - H5 file with binary data on transcript abundance in HDF5 file format
    - TSV file with plain-text information on transcript abundance
@@ -244,24 +253,24 @@ Full manual for this application is available online: https://cytoscape.org/cyto
 3. Adjust formatting: **Select EnrichmentMap Tab on the left side > Select Chart data: NES Columns and Select Publication-Ready**.
 4. Delete clusters with <3 elements: **Select Filter Tab on the left side > “+” button > Topology Filter > Select “at least”, “2” neighbours within distance “2”. Menu Select > Nodes > Hide Unselected Nodes. Menu File > New Network > From Selected Nodes, All Edges.**
 5. Define clusters of similar pathways representing major biological themes: **Apps > AutoAnnotate > New Annotation Set… > Advanced tab > Select Use clusterMaker App > Select Community cluster (GLay) as Cluster algorithm > Select Layout network to prevent cluster overlap > Type 4 for Max words per label and 8 for Adjacent word bonus > “Create annotations” button > “OK”.**
-6.	Adjust formatting: **Select AutoAnnotate Display Tab on the right side > Unselect “Scale font by cluster size”, select “Word wrap”.** Select Chart data: **NES Columns** and Select Publication-Ready.
-7.	Save the image: **Menu File > Export > Network to Image... > Export file format: PDF > Ok.**
+6. Adjust formatting: **Select AutoAnnotate Display Tab on the right side > Unselect “Scale font by cluster size”, select “Word wrap”.** Select Chart data: **NES Columns** and Select Publication-Ready.
+7. Save the image: **Menu File > Export > Network to Image... > Export file format: PDF > Ok.**
  
 ## 8 SUPPLEMENTARY PARTS (ALTERNATIVE PARTS OF THE PATHWAY)
 ### 8.1 Trim adaptors and do quality trim with Trimmomatic
 This part is optional. You need to run it only in case that you want to start from FASTQ.GZ files containing adaptors.
 
-Install Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic). Download and unpack it to /home/user/bin/Trimmomatic-0.40/. UGENE on Windows contains a build-in version of Trimmomatic and can replace the Linux version.
+Install Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic). Download and unpack it to /home/user/bin/Trimmomatic-0.40/. UGENE contains a build-in version of Trimmomatic and can replace the Linux version.
 ```
-unzip ./Trimmomatic-0.40.zip
+unzip -d ~/bin/ ./Trimmomatic-0.40.zip
 ```
 Copy-paste to a new working folder FASTQ.GZ files containing paired reads and /main/trimmomatic.sh script. Launch the script to proceed with Trimmomatic.
 - This workflow is only valid for the paired-ended reads (PE). You cannot use it for single-ended (SE) reads.
-- Default workflow parameters: ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36. Adapt it in the trimmomatic.sh script if necessary.
+- Default workflow parameters: **ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36**. Adapt it in the trimmomatic.sh script if necessary.
 - Illimina HiSeq is using Phred33 quality scores and needs TruSeq3-PE-2.fa file from the Trimmomatic package for removing adaptors. Input files for adaptors may vary depending on the machine, etc. Check it each time.
 - Phred >20 parameter used for quality trim corresponds to 99% accuracy in nucleotides.
 - Adapt the directory pathway for the Trimmomatic package in the trimmomatic.sh script if necessary.
 - After trimming, check the report of Trimmomatic carefully for errors and save it as a log file (log.txt). The output is 4 files sorted into two directories:
-  - 2 files with paired reads (forward and reverse): <SAMPLE>_1P.fastq.gz and <SAMPLE>_2P.fastq.gz stored in ./trimmed/paired directory.
-  - 2 files with unpaired reads (forward and reverse): <SAMPLE>_1U.fastq.gz and <SAMPLE>_2U.fastq.gz stored in ./trimmed/unpaired directory.
+  - 2 files with paired reads (forward and reverse): \<SAMPLE\>\_1P.fastq.gz and \<SAMPLE\>\_2P.fastq.gz stored in ./trimmed/paired directory.
+  - 2 files with unpaired reads (forward and reverse): \<SAMPLE\>\_1U.fastq.gz and \<SAMPLE\>\_2U.fastq.gz stored in ./trimmed/unpaired directory.
 - Collect and keep generated output files from the newly created folder named ‘trimmed’. For the following steps, you will need only 2 files with paired reads.
