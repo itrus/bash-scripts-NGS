@@ -66,11 +66,22 @@ sudo make install
 
 Install iVAR (https://github.com/andersen-lab/ivar) with running the **install-ivar.sh** script.
 
-Install Trimmomatic (v 0.40; binary; http://www.usadellab.org/cms/?page=trimmomatic). Download and unpack it to /home/user/bin/Trimmomatic-0.40/. UGENE on Windows contains a build-in version of Trimmomatic and can replace the Linux version.
+Install Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic). Download and unpack it to /home/user/bin/Trimmomatic-0.40/. UGENE contains a build-in version of Trimmomatic and can replace the Linux version.
 ```
-unzip ./Trimmomatic-0.40.zip
+unzip -d ~/bin/ ./Trimmomatic-0.40.zip
 ```
-To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (Right mouse button > Open With Software Install > Install)
+### R and RStudio
+To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (**Right mouse button > Open With Software Install > Install**)
+
+Make sure you have the latest version of R. To manually reinstall R execute: 
+```
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo apt update
+sudo apt install r-base r-base-core r-recommended r-base-dev
+```
+
+To install RStudio, download from the official website (https://rstudio.com/products/rstudio/download/#download) version for Ubuntu 18 (or your version). Then install the downloaded file (**Right mouse button > Open With Software Install > Install**)
 
 ## 3 QUALITY CONTROL
 
@@ -107,16 +118,17 @@ Alternatively, you can download and process FASTQ.GZ files with FastQC.
 2. Run /main/qc.sh script.
 
 ## 4 Trimmomatic
+Prepare original FASTQ.GZ files with Trimmomatic.
 
 Copy-paste to a new working folder FASTQ.GZ files containing paired reads and /main/trimmomatic.sh script. Launch the script to proceed with Trimmomatic.
 - This workflow is only valid for the paired-ended reads (PE). You cannot use it for single-ended (SE) reads.
-- Default workflow parameters: ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36. Adapt it in the trimmomatic.sh script if necessary.
+- Default workflow parameters: **ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36**. Adapt it in the trimmomatic.sh script if necessary.
 - Illimina HiSeq is using Phred33 quality scores and needs TruSeq3-PE-2.fa file from the Trimmomatic package for removing adaptors. Input files for adaptors may vary depending on the machine, etc. Check it each time.
 - Phred >20 parameter used for quality trim corresponds to 99% accuracy in nucleotides.
 - Adapt the directory pathway for the Trimmomatic package in the trimmomatic.sh script if necessary.
 - After trimming, check the report of Trimmomatic carefully for errors and save it as a log file (log.txt). The output is 4 files sorted into two directories:
-  - 2 files with paired reads (forward and reverse): <SAMPLE>_1P.fastq.gz and <SAMPLE>_2P.fastq.gz stored in ./trimmed/paired directory.
-  - 2 files with unpaired reads (forward and reverse): <SAMPLE>_1U.fastq.gz and <SAMPLE>_2U.fastq.gz stored in ./trimmed/unpaired directory.
+  - 2 files with paired reads (forward and reverse): \<SAMPLE\>\_1P.fastq.gz and \<SAMPLE\>\_2P.fastq.gz stored in ./trimmed/paired directory.
+  - 2 files with unpaired reads (forward and reverse): \<SAMPLE\>\_1U.fastq.gz and \<SAMPLE\>\_2U.fastq.gz stored in ./trimmed/unpaired directory.
 - Collect and keep generated output files from the newly created folder named ‘trimmed’. For the following steps, you will need only 2 files with paired reads.
    
 ## 5 Align reads to the reference with BWA
@@ -124,10 +136,10 @@ Copy-paste to a new working folder FASTQ.GZ files containing paired reads and /m
 - Make a copy of output FASTQ.GZ files from Trimmomatic corresponding to paired reads (2 files per sample). Don’t mix paired and unpaired files after Trimmomatic. Proceed only with paired ones. For the PhiX control sample name could be "Undetermined".
 Provide a file representing the reference for the alignment.
 - This is an important step! Get the CORRECT reference (FASTA file). Place the reference FASTA file in the same folder as FASTQ.GZ files from Trimmomatic. Check the bwa.sh script and edit it if necessary. You need to have the correct reference mentioned/uncommented in the first lines of the script.
-  - For example, for PhiX control use the Illumina website (https://support.illumina.com/sequencing/sequencing_software/igenome.html). Genbank has the PhiX sequence [Genbank: NC_001422.1 that is 5 nt different from the Illumina’s one.
-   - For the PR strain of ZIKV I downloaded FASTA file (ZIKV-PR.fasta) from the Genbank [Genbank: KU501215.1].
-   - For the BaPCV2b strain of PCV2 I downloaded FASTA file (BaPCV2b.fasta) from the Genbank [Genbank: FJ233905.1].
-- Run /main/bwa.sh script to align paired reads to the reference. First index files for the reference genome will be created. Then as the resulting output sorted and merged BAM file named as <SAMPLE>.BAM will be created. Unmapped reads are skipped (“F” parameter). After successfully run, delete the copy-pasted input FASTQ.GZ files to save the space and other tiny files (e.g. index), but keep the generated output (BAM file) and logging information from the shell/terminal.
+  - For example, for PhiX control use the Illumina website (https://support.illumina.com/sequencing/sequencing_software/igenome.html). Genbank has the PhiX sequence \[Genbank: NC_001422.1\] that is 5 nt different from the Illumina’s one.
+   - For the PR strain of ZIKV I downloaded FASTA file (ZIKV-PR.fasta) from the Genbank \[Genbank: KU501215.1\].
+   - For the BaPCV2b strain of PCV2 I downloaded FASTA file (BaPCV2b.fasta) from the Genbank \[Genbank: FJ233905.1\].
+- Run /main/bwa.sh script to align paired reads to the reference. First index files for the reference genome will be created. Then as the resulting output sorted and merged BAM file named as \<SAMPLE\>.BAM will be created. Unmapped reads are skipped (“F” parameter). After successfully run, delete the copy-pasted input FASTQ.GZ files to save the space and other tiny files (e.g. index), but keep the generated output (BAM file) and logging information from the shell/terminal.
 
 ## 6 Coverage analysis
 ### 6.1 UGENE
