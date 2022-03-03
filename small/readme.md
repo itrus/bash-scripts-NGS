@@ -126,8 +126,9 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
 ```
 #!/bin/sh
 
-# Updating the packages
-apt update
+#Packages updating
+sudo apt update
+sudo apt-get upgrade
 
 # Deleting partial packages
 apt-get clean && apt-get autoclean
@@ -139,6 +140,11 @@ apt-get autoremove -y
 # Removing orphaned packages
 deborphan | xargs sudo apt-get -y remove --purge
 
+#deleting old kernels
+sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
+echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
+sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
+
 # Cleaning /tmp
 find /tmp -type f -atime +2 -mtime +2  | xargs  /bin/rm -f &&
 find /tmp -type d -mtime +2 -exec /bin/rm -rf '{}' \; &&
@@ -148,7 +154,12 @@ find -L /tmp -mtime +2 -print -exec rm -f {} \;
 # Cleaning Chromium browser cache
 rm -r ~/.cache/chromium
 rm -r ~/.config/chromium/Default/File\ System
-rm -r ~/.cache/thumbnails
+
+#Cleaning Chrome browser cache
+rm -r /home/*/.cache/google-chrome/
+
+#cleaning images thumbnails
+rm -r /home/*/.cache/thumbnails
 
 # Cleaning the Trash
 rm -rf /home/*/.local/share/Trash/*/**
