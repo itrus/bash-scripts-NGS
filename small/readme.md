@@ -1,10 +1,10 @@
 # Working with stranded NGS data
 ## Alignment to the reference with Bowtie2
 ### Paired-end reads
-- BWA is unable to process stranded data (https://sourceforge.net/p/bio-bwa/mailman/message/31050505/) to go with only positive or negative strand data strand. The option is to use Bowtie for alignment.
-- The following script will process multiple FASTQ.GZ files with Bowtie2. It should be two files with paired reads per sample (two FASTQ.GZ files) only given as input. No more, no less. Rename all these files to have a similar beginning of the filename ending with the “\_“ symbol. E.g for the 10A sample keep “10A” as the first symbols: 10A\_r1.FASTQ.GZ and 10A\_r2.FASTQ.GZ. 10A\_.FASTQ.GZ and 10A\_1.FASTQ.GZ are also fine. Any file like 10A.\_FASTQ.GZ or 10A.FASTQ.GZ will be wrong.
+- BWA is unable to process stranded data and to go with only positive or negative strand data strand (https://sourceforge.net/p/bio-bwa/mailman/message/31050505/). The option is to use Bowtie for alignment.
+- The following script will process multiple FASTQ.GZ files with Bowtie2. It should be only two files with paired reads per sample (two FASTQ.GZ files) given as input. No more, no less. Rename all these files to have a similar beginning of the filename ending with the “\_“ symbol. E.g. for the 10A sample keep “10A” as the first symbols: 10A\_r1.FASTQ.GZ and 10A\_r2.FASTQ.GZ. 10A\_.FASTQ.GZ and 10A\_1.FASTQ.GZ are also fine. Any file like 10A.\_FASTQ.GZ or 10A.FASTQ.GZ will be wrong.
 - Output will consist of two sorted BAM files. with positive-strand (XXXX-pos.bam) and negative-strand (XXXX-neg.bam) reads. Non-aligned reads will not be saved.
-- Before starting, don't forget to modify reference filename (REFERENCE).
+- Before starting, don't forget to modify the reference filename (REFERENCE).
 
 ```
 #!/bin/bash
@@ -44,8 +44,8 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
 }
 ```
 
-## Checking the strandedness direction with Kallisto.
-It is possible to construct the library in a such way that reverse and forward reads are swapped. In order to check the dataset it is possible to run Kallisto and to see which direction maps better to the transcriptome.
+## Checking the strandedness direction with Kallisto
+It is possible to construct the library in such a way that reverse and forward reads are swapped. To check the dataset, it is possible to run Kallisto and to see which direction maps better to the transcriptome.
 
 Select only the first 0.5 million reads from each FASTQ file.
 ```
@@ -53,7 +53,7 @@ zcat WT3_1P.uniq.fastq.gz | head -n 500000 | gzip > WT3_1P.test.fastq.gz
 zcat WT3_2P.uniq.fastq.gz | head -n 500000 | gzip > WT3_2P.test.fastq.gz
 ```
 
-Create index for the human genome index ("transcriptome.idx") with Kallisto (described well in the RNA-seq pathway). Then run the follwoing commands.
+Create an index for the human genome index ("transcriptome.idx") with Kallisto (described well in the RNA-seq pathway). Then run the following commands.
 
 ```
 ~/bin/kallisto/kallisto quant -i transcriptome.idx  -o test.un WT3_1P.test.fastq.gz WT3_2P.test.fastq.gz 
@@ -64,11 +64,11 @@ paste test.fr/abundance.tsv test.rf/abundance.tsv test.un/abundance.tsv  | cut -
 ```
 
 # Basic Linux commands
-## Creating MD5 sum for each individual file in the directory
+## Creating MD5 sum for each file in the directory
 ```
 find -type f -exec md5sum "{}" +
 ```
-## Comressing all individual files in the directory into individual GZ archives
+## Compressing all individual files in the directory into individual GZ archives
 ```
 parallel gzip -v9 ::: *
 ```
@@ -105,7 +105,7 @@ for ((i=0; i<$TOTAL_FILES; i+=2))
 date
 ```
 ### Using fastx_collapser for single-end reads.
-The following script, in parallel, converts FASTQ into FASTA files and, therefore, deletes information on quality of the reads. Do quality trimming prior to running this script.
+The following script, in parallel, converts FASTQ into FASTA files and, therefore, deletes information on the quality of the reads. Do quality trimming before running this script.
 ```
 #!/bin/bash
 TOTAL_FILES=`find -iname '*.fastq' | wc -l`
@@ -126,7 +126,7 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
 ```
 #!/bin/sh
 
-#Packages updating
+# Packages updating
 sudo apt update
 sudo apt-get upgrade
 
@@ -140,7 +140,7 @@ apt-get autoremove -y
 # Removing orphaned packages
 deborphan | xargs sudo apt-get -y remove --purge
 
-#deleting old kernels
+# Deleting old kernels
 sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
 echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
 sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
@@ -155,10 +155,10 @@ find -L /tmp -mtime +2 -print -exec rm -f {} \;
 rm -r ~/.cache/chromium
 rm -r ~/.config/chromium/Default/File\ System
 
-#Cleaning Chrome browser cache
+# Cleaning Chrome browser cache
 rm -r /home/*/.cache/google-chrome/
 
-#cleaning images thumbnails
+# Cleaning images thumbnails
 rm -r /home/*/.cache/thumbnails
 
 # Cleaning the Trash
@@ -219,7 +219,7 @@ Use KrakenTools (https://ccb.jhu.edu/software/krakentools/index.shtml) to conver
 find ./ -maxdepth 1 -iname '*.txt' | parallel -j 4 --progress ~/bin/KrakenTools-master/kreport2krona.py -r {} -o {.}.krona_report.txt
 find ./ -maxdepth 1 -iname '*.txt' | parallel -j 4 --progress ~/bin//Krona-master/KronaTools/scripts/ImportText.pl {} -o {.}.krona_report.html
 ```
-Open HTML files with web-brower
+Open HTML files with web browser
 ## Pavian
 Install RStudio.
 Then install Pavian.
