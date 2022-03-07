@@ -232,6 +232,7 @@ Run Pavian in RStudio to visualise the results.
 
 # Demultiplexing
 The following script will use Cutadapt to remove 3' adaptor stored in 3adapter.fasta file from a batch of FASTQ files.
+
 First create 3adapter.fasta file.
 ```
 >3adapter
@@ -257,7 +258,8 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
 }
 ```
 Removing 5' adapter and demultiplexing.
-First create 5adapter.fasta file. Place first the longer adapters.
+
+First create 5adapter.fasta file with all adapter variants. Put first the longer ones.
 ```
 >adapter1
 NNNCACTAGCN
@@ -267,6 +269,7 @@ NNNGTGAGCN
 NNNAGAGCN 
 ```
 Now you are ready to remove it and to demultipolex FASTQ files with the following script.
+
 Zero-length reads will not be preserved (**-m 1** parameter).
 ```
 #!/bin/bash
