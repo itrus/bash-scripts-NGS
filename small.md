@@ -20,6 +20,11 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
     seqkit bam -C $FILE_NAME.bam
 }
 ```
+## Converting all BAM files to SAM files
+
+```
+parallel --plus 'samtools view -h {} -o {...}.sam' ::: *.bam
+```
 
 # Cleaning the Linux environment
 - The following script will delete rubbish from the system. Use it with caution.
