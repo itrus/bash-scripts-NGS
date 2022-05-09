@@ -1,4 +1,9 @@
 # Basic Linux commands
+## Processing all files in the directory
+```
+for i in *.fastq; do pyFastqDuplicateRemover.py -f $i -o collapsed_$i; done
+```
+
 ## Creating MD5 sum for each file in the directory
 ```
 find -type f -exec md5sum "{}" +
