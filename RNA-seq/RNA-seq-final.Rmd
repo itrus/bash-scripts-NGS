@@ -32,8 +32,8 @@ GeneExpression <- readRDS("GE.Rdata")
 GMTFileName <- "c5.go.bp.v7.5.1.symbols.gmt"
 
 # selecting the samples we need
-#GeneExpression <- GeneExpression[GeneExpression$samples$cell_type == "cd117",]
-GeneExpression <- GeneExpression[GeneExpression$samples$lib.size > 100000,]
+#GeneExpression <- GeneExpression[,which(GeneExpression$samples$cell_type == "cd117")]
+#GeneExpression <- GeneExpression[,which(GeneExpression$samples$lib.size > 100000)]
 
 # setting up main parameters
 FactorsList <- c("treatment")
