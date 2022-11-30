@@ -188,7 +188,7 @@ Model #1. +Infection status (one binary (Yes/No) factor (Treatment) is taken int
 ModelDesign <- model.matrix(~treatment, data = GeneExpression$samples)
 ExpressionValues <- voom(GeneExpression, ModelDesign, plot = T)
 ModelFit <- lmFit(ExpressionValues, ModelDesign) %>% eBayes
-Result <- topTable(ModelFit, number = Inf, sort.by = "logFC").
+Result <- topTable(ModelFit, number = Inf, sort.by = "logFC")
 ```
 Model #2. +Infection status -Gender (two binary factors are taken into account: Treatment and Sex. Model is solved for two factors. But results are given only for one factor. To be more precise for one outcome (_Treatment = infected_). Thus, we exclude effect of the second factor (sex) from the answer.)
 ```
