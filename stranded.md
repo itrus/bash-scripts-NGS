@@ -62,3 +62,32 @@ Create an index for the human genome index ("transcriptome.idx") with Kallisto (
 
 paste test.fr/abundance.tsv test.rf/abundance.tsv test.un/abundance.tsv  | cut -f1,4,9,14 | awk 'BEGIN{sum1=0;sum2=0;sun3=0}{sum1+=$2;sum2+=$3;sum3+=$4}END{print sum1,sum2,sum3}' | less | awk '{print $2/$1,$3/$1,$3/$2}'| awk '{if($1<0.3 && $3>3)print "forward-stranded";else if($1>3 && $2>3)print "reverse-stranded";else print "unstranded"}'
 ```
+
+## Pipeline for checking multiple paired files at once
+```
+#!/bin/bash
+date
+KALLISTO=~/bin/kallisto
+INDEX=homo108.idx
+GTF=Homo_sapiens.GRCh38.108.gtf.gz
+TOTAL_FILES=`find -iname '*.fastq.gz' | wc -l`
+ARR=($(ls *.fastq.gz))
+mkdir temp
+for ((i=0; i<$TOTAL_FILES; i+=2))
+{
+   SAMPLE_NAME=`echo ${ARR[$i]} | awk -F "_" '{print $1}'`
+   printf "\n"
+   echo "[processing] $SAMPLE_NAME"
+   zcat ${ARR[$i]} | head -n 400000 | gzip > temp/R1.test.fastq.gz
+   zcat ${ARR[$i+1]} | head -n 400000 | gzip > temp/R2.test.fastq.gz
+   echo "testing unstranded"
+   $KALLISTO/kallisto quant -i $INDEX -g $GTF -t 4  -o test.un temp/R1.test.fastq.gz temp/R2.test.fastq.gz
+   echo "testing RF-stranded"
+   $KALLISTO/kallisto quant -i $INDEX -g $GTF -t 4  -o test.rf temp/R1.test.fastq.gz temp/R2.test.fastq.gz --rf-stranded
+   echo "testing FR-stranded"
+   $KALLISTO/kallisto quant -i $INDEX -g $GTF -t 4  -o test.fr temp/R1.test.fastq.gz temp/R2.test.fastq.gz --fr-stranded
+   echo "RESULT:"
+   paste test.fr/abundance.tsv test.rf/abundance.tsv test.un/abundance.tsv  | cut -f1,4,9,14 | awk 'BEGIN{sum1=0;sum2=0;sun3=0}{sum1+=$2;sum2+=$3;sum3+=$4}END{print sum1,sum2,sum3}' | less | awk '{print $2/$1,$3/$1,$3/$2}'| awk '{if($1<0.3 && $3>3)print "forward-stranded";else if($1>3 && $2>3)print "reverse-stranded";else print "unstranded"}'
+}
+date 
+```
