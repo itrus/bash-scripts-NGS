@@ -1,8 +1,10 @@
 ---
 title: "RNA-Seq2"
 author: "Ivan Trus"
-date: "2021-07-10"
-output: html_document
+date: '2022-12-07'
+output:
+  html_document: default
+  pdf_document: default
 ---
 # Initialization
 
@@ -25,37 +27,45 @@ library(edgeR)
 library(limma)
 ```
 
-# Importing Data. Selecting needed samples for the run. 
+# Importing Data and selecting samples for the run
 ```{r importing Transcripts database and reads, echo=TRUE}
 # Reading the full dataset
 GeneExpression <- readRDS("GE.Rdata")
 GMTFileName <- "c5.go.bp.v7.5.1.symbols.gmt"
 
 # selecting the samples we need
-#GeneExpression <- GeneExpression[,which(GeneExpression$samples$cell_type == "cd117")]
-#GeneExpression <- GeneExpression[,which(GeneExpression$samples$lib.size > 100000)]
+GeneExpression <- GeneExpression[, GeneExpression$samples$timepoint == "0h"]
+#GeneExpression <- GeneExpression[, GeneExpression$samples$cell == "WT"]
+#GeneExpression <- GeneExpression[, GeneExpression$samples$lib.size > 100000]
 
 # setting up main parameters
-FactorsList <- c("treatment")
+FactorsList <- colnames(GeneExpression$samples)[-2:-3]
+print(paste("Following factors were identified:", FactorsList))
 
 # setting up parameters for GO analyses
 CurrentFactor <- 1
-FDRLimit <- 0.1
-GeneSetOfInterest <- "GOBP_CEREBELLAR_CORTEX_FORMATION"
+FDRLimit <- 0.25
+GeneSetOfInterest <- "GOBP_PROTEIN_NEDDYLATION"
 ```
 
-Normalization to middle line.
+# Normalization to the middle line
 ```{r normalization}
 # printing data on selected samples
 DT::datatable(as.data.frame(GeneExpression$samples),
   caption = "Samples Metadata", options = list(pageLength = 100))
-barplot(GeneExpression$samples$lib.size /10^6, main = "Library size, x10^6 reads")
+barplot(height = GeneExpression$samples$lib.size /10^6,
+        names = rownames(GeneExpression$samples),
+        main = "Library size, x10^6 reads",
+        col = brewer.pal(dim(GeneExpression$samples)[1], "Set3"))
 
 # Normalization
-GeneExpression <- calcNormFactors(GeneExpression)
+GeneExpression <- calcNormFactors(GeneExpression, method = "TMM")
 plot(GeneExpression$samples$norm.factors * 100, main = "Normalization of CPM",
      xlab = "Sample, #", ylab = "%")
 abline(h = 100)
+
+# Saving the full dataset
+write.csv(GeneExpression, file = paste("GE normalized", gsub(":", "-", Sys.time()),".csv"))
 ```
 
 # Unsupervised PCA
@@ -68,9 +78,9 @@ for(i in 1:dim(GeneExpression$samples)[1]){
 }
 par(mfrow = c(1, 1))
 for(i in 1:length(FactorsList)){
-  group <- (GeneExpression$samples[FactorsList[i]])[, 1]
-  col.group <- as.factor(group)
-  levels(col.group) <-  colorRampPalette(brewer.pal(nlevels(col.group), "Set1"))(nlevels(col.group))
+  group <- (GeneExpression$samples[FactorsList[i]])[, 1] %>% as.factor()
+  col.group <- group
+  levels(col.group) <- brewer.pal(nlevels(col.group), "Set1")
   col.group <- as.character(col.group)
   plotMDS(lcpm, labels = group, col = col.group)
   title(main = FactorsList[i])
@@ -81,7 +91,7 @@ for(i in 1:length(FactorsList)){
 ```{r model, echo=TRUE}
 # Start of the model
 
-ModelDesign <- model.matrix(~treatment, data = GeneExpression$samples)
+ModelDesign <- model.matrix(~cell, data = GeneExpression$samples)
 ExpressionValues <- voom(GeneExpression, ModelDesign, plot = T)
 ModelFit <- lmFit(ExpressionValues, ModelDesign) %>% eBayes
 Result <- topTable(ModelFit, number = Inf, sort.by = "logFC")
@@ -90,37 +100,33 @@ Result <- topTable(ModelFit, number = Inf, sort.by = "logFC")
 ```
 
 # DEG calculations results
+For volcano plots Top10 genes are named. Grey dashed line: threshold for non-adjusted p-value of 0.05. Blue and red lines: thresholds for -1 and +1 FC.")
 ```{r DEG calculations results}
 print(ModelDesign)
-if(dim(Result)[1] < 500 & dim(Result)[1] > 0){
-
-  plotSA(ModelFit, main = "Final model: Mean−variance trend")
-  plotBCV(estimateDisp(GeneExpression, ModelDesign))
-  heatmap(ExpressionValues$E[rownames(ExpressionValues$genes) %in% Result$GeneId, ],
-           scale = "row", labels_row = ExpressionValues$genes$external_gene_name,
-           annotation_col = as.data.frame(ExpressionValues$targets[FactorsList]))
-}
+plotSA(ModelFit, main = "Final model: Mean−variance trend")
+plotBCV(estimateDisp(GeneExpression, ModelDesign))
 summary(decideTests(ModelFit))
 for(i in 2:length(colnames(ModelDesign))){
   plotMD(ModelFit, status = rownames(ExpressionValues$genes) %in% Result$GeneId, coef = i)
   abline(h = c(-1, 1), col = "blue")
   volcanoplot(ModelFit, coef = i, names = GeneExpression$genes$external_gene_name,
-            highlight = 10)
-  title(main = colnames(ModelDesign)[i],
-        sub = "Threshold is for non-adjusted p-value. Top10 genes are named")
-  abline(h = -log10(0.05), col = "red", lwd = 3)
+              highlight = 10, xlab = "log2FC", ylab = NULL)
+  title(main = colnames(ModelDesign)[i])
+  abline(h = -log10(0.05), col = "grey", lwd = 2, lty = "dashed")
+  abline(v = -1, col = "blue", lwd = 1)
+  abline(v = 1, col = "red", lwd = 1)
   }
-DT::datatable(as.data.frame(Result),
-  caption = "DEG", options = list(pageLength = 10))
 
 ## Saving raw data
-saveRDS(ExpressionValues, file = "DEG.Rdata")
-write.csv(Result, file = "DEG.csv")
-write.csv(ExpressionValues, file = "GE.csv")
+stopifnot("GeneID error" = rownames(Result) == Result$GeneId)
+rownames(Result) <- NULL
+Result <- Result[order(Result$adj.P.Val), ]
+DT::datatable(as.data.frame(Result),
+  caption = "DEG", options = list(pageLength = 10))
+write.csv(Result, file = paste("DEG", gsub(":", "-", Sys.time()),".csv"))
 ```
 
 # Supervised PCA
-
 ```{r PCA plots}
 ExpressionValues$E %>%
   t() %>%
@@ -135,17 +141,13 @@ for(i in 1:length(FactorsList)){
   text(PCA$x, labels = ExpressionValues$targets %>% .[FactorsList[i]] %>% .[, 1] %>% t, pos = 4)
   title(main = FactorsList[i])
 }
-
 rownames(PCA$x) <- apply(cbind(rownames(ExpressionValues$targets),
-                               ExpressionValues$targets[FactorsList]), 1, paste, collapse = "/")
+                               ExpressionValues$targets[FactorsList]), 1, paste,
+                         collapse = "/")
 DT::datatable(as.data.frame(PCA$x[, 1:3]), options = list(pageLength = 10),
-              caption = paste("Raw values for PCA analysis, sample", FactorsList,
-                              collapse = "/"))
-PCA %>%
-  summary() %>%
-  .$importance -> PCA
-print(t(PCA[, 1:5]))
-barplot((PCA[2, ])[1:10], main = "Weight of PCs, %")
+              caption = paste("Raw values for PCA analysis, sample",
+                              FactorsList, collapse = "/"))
+barplot(summary(PCA)$importance[2, ][1:10], main = "Weight of PCs, %")
 ```
 
 # GO
@@ -162,8 +164,8 @@ GeneIndex <- lapply(GeneIndex, function(x) x[!is.na(x)])
 CountedGene <- ids2indices(GeneIndex, id = ExpressionValues$genes$external_gene_name)
 
 ## Analysis
-GroupFactor <- FactorsList[CurrentFactor] %>% ExpressionValues$targets[.] %>% .[, 1] %>% factor
-Design <- model.matrix(~ 0 + GroupFactor)
+GroupFactor <- ExpressionValues$targets[FactorsList[CurrentFactor]][, 1] %>% factor
+Design <- model.matrix(~0 + GroupFactor)
 colnames(Design) <- c("Negative", "Positive")
 print(Design)
 ContrastsMatrix <- makeContrasts(
@@ -171,7 +173,8 @@ ContrastsMatrix <- makeContrasts(
   levels = colnames(Design)
 )
 print(ContrastsMatrix)
-Result <- camera(ExpressionValues, CountedGene, Design, contrast = ContrastsMatrix, sort = T)
+Result <- camera(ExpressionValues, CountedGene, Design, contrast = ContrastsMatrix,
+                 sort = T)
 print(paste("GO pathways analyzed:", dim(Result)[1]))
 print(paste("Affected GO pathways (Up + Down, FDR <", FDRLimit, "):",
             Result[Result$Direction == "Up" & Result$FDR < FDRLimit, ] %>% count %>%
@@ -179,6 +182,7 @@ print(paste("Affected GO pathways (Up + Down, FDR <", FDRLimit, "):",
             Result[Result$Direction == "Down" & Result$FDR < FDRLimit, ] %>% count %>%
               as.integer)
       )
+Result <- Result[order(Result$PValue), ]
 DT::datatable(as.data.frame(Result[Result$Direction == "Up" & Result$FDR < FDRLimit, ] %>% row.names),
               options = list(pageLength = 10),
               caption = paste("Upregulated GOs for factor:", FactorsList[CurrentFactor],
@@ -189,7 +193,7 @@ DT::datatable(as.data.frame(Result[Result$Direction == "Down" & Result$FDR < FDR
               ". At FDR:", FDRLimit))
 
 # saving GO results
-write.csv(as.data.frame(Result), file = "GO.csv")
+write.csv(as.data.frame(Result), file = paste("GO", gsub(":", "-", Sys.time()),".csv"))
 
 # saving GO results for Cytoscape in G:Profiler file format
 GProfilerFormatResult <- Result %>% as.data.frame
@@ -201,19 +205,19 @@ colnames(GProfilerFormatResult) <- c("GO.ID", "Description", "p.Val", "FDR", "Ph
 GeneIndex %>% lapply(function(x) x %>% unlist %>% paste(collapse = ",")) %>% stack -> GeneListGProfiler
 colnames(GeneListGProfiler) <- c("Genes", "GO.ID")
 GProfilerFormatResult <- left_join(GProfilerFormatResult, GeneListGProfiler)
-write_delim(GProfilerFormatResult, "GO for cytoscape.txt", delim = "\t")
+write_delim(GProfilerFormatResult, paste("GO for Cytoscape", gsub(":", "-", Sys.time()),".txt"), delim = "\t")
 ```
 
   
 # Selected GO
 ```{r barcodes}
-# barcodes and heatmaps for GeneSet of Interest
+# # barcodes and heatmaps for GeneSet of Interest
 barcodeplot(ModelFit$t[, 2],
   index = CountedGene[[`GeneSetOfInterest`]],
   main = paste("Factor:", FactorsList[CurrentFactor], "\n", GeneSetOfInterest)
 )
 pheatmap(ExpressionValues$E[CountedGene[[`GeneSetOfInterest`]], ],
-  scale = "row", 
+  scale = "row",
   labels_row =
     ExpressionValues$genes$external_gene_name[CountedGene[[`GeneSetOfInterest`]]],
   annotation_col = as.data.frame(ExpressionValues$targets[FactorsList]))
