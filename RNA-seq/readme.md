@@ -166,7 +166,7 @@ Then script converts absolute counts/reads to relative counts-per-million reads 
 
 ### 6.2 The second part of the R script makes the analysis
 While the previous part of the R script needs only one parameter to be adjusted (the reference genome), the second script has multiple parameters to consider.
-1. Adjust the R script as needed. Important points are given below. For factor names and possible values, please refer to the report from the previous/initial R script.
+1. Adjust the R script as needed. Important points are given below. For factor names and possible values, please refer to the report from the previous part of the R script.
    - Load the input file: _GeneExpression <- readRDS("GE.Rdata")_
    - Load the GMT file: _GMTFileName <- "c5.bp.v7.2.symbols.gmt"_ (use correct name if the file was updated)
    - Setting up the GO analysis. Alternatively you can do GO analysis online using the Enrichr (https://maayanlab.cloud/Enrichr/)
