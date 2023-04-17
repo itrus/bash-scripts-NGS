@@ -1,0 +1,412 @@
+---
+title: "RNA-seq"
+author: "Ivan Trus"
+date: "Last updated: `r Sys.time()`"
+output:
+  html_document:
+    theme: united
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    toc_depth: 3
+    number_sections: true
+    code_folding: hide
+    code_download: true
+link-citations: true
+---
+
+# Loading data
+
+## Initialization of constants
+
+```{r Initialization}
+# setting up parameters for BioMart import
+currentBioMart <- "ChlSab1.1"
+filename <- paste0("BioMart-",currentBioMart,".Rdata")
+
+# setting up parameters for kallisto import
+folderWithKallistoData <- "kallisto"
+descriptionFile <- "RunTable.txt"
+
+# setting up parameters for GO analyses
+proceedToGO <- TRUE
+FDRLimit <- 0.25
+GMTFileName <- "c5.go.bp.v7.5.1.symbols.gmt"
+geneSetOfInterest <- "GOBP_PROTEIN_NEDDYLATION"
+```
+
+-   Current BioMart is **`r currentBioMart`** saved as **`r filename`** file.
+-   Kallisto results will be in the **`r folderWithKallistoData`** subfolder.
+-   The description is coming from the **`r descriptionFile`** file.
+-   GO analysis
+    -   FDR is **`r FDRLimit`**
+    -   GMT is from the **`r GMTFileName`** file
+    -   GO of interest is **`r geneSetOfInterest`**
+
+## Loading libraries
+
+```{r Libraries, warning=FALSE}
+StartTime <- Sys.time()
+
+#installing required Bioconductor packages
+#uncomment these lines and run them once if you still don't have these required packages
+# install.packages("BiocManager")
+# BiocManager::install("biomaRt")
+# BiocManager::install("tximport")
+# BiocManager::install("edgeR")
+# BiocManager::install("limma")
+# BiocManager::install("rhdf5")
+
+library(librarian)
+librarian::shelf(magrittr, DT, ggplot2, xfun, dplyr, janitor,
+                 readr, RColorBrewer, biomaRt, tximport, edgeR, rhdf5,
+                 pheatmap, stringr, limma,
+                 quiet = T)
+librarian::check_attached()
+```
+
+## Importing BioMart
+
+String "**GRCh38.p13**" corresponds to the current version of BioMart for **human genome**. Searched BioMart: **`r currentBioMart`** The current block creates database of Genes and Transcripts called *`r filename`*. It will be created once and re-loaded from the saved file if re-ruinning the script.
+
+Full list of available BioMart databases is available here:
+
+-   [Table format](https://www.ensembl.org/biomart/martservice?type=datasets&mart=ENSEMBL_MART_ENSEMBL){.uri}
+-   [Drop-down list format](https://www.ensembl.org/biomart/martview){.uri}
+
+```{r importing Transcripts database}
+
+if(file.exists(filename)){
+  Tx2Gen <- readRDS(filename)
+  print(paste("BioMart file was found and loaded:", filename,
+              "(", file.info(filename)$size, "bytes)"))
+  } else {
+    print(paste("We are searching for:", currentBioMart))
+    foundBioMart <- searchDatasets(mart = useMart("ensembl"),
+                                   pattern = currentBioMart)
+    stopifnot("Wrong BioMart was found" = foundBioMart[3] == currentBioMart)
+    stopifnot("Number of found BioMarts is not equal one" =
+                dim(foundBioMart[1]) == 1)
+    print(paste("We found:", foundBioMart %>% toString()))
+    Tx2Gen <- getBM(attributes = c("ensembl_transcript_id",
+                                   "transcript_version",
+                                   "ensembl_gene_id",
+                                   "external_gene_name",
+                                   "description",
+                                   "transcript_biotype",
+                                   "transcript_length"),
+                    mart = (useMart(biomart = "ENSEMBL_MART_ENSEMBL",
+                                  dataset = foundBioMart[1])))
+    saveRDS(Tx2Gen, filename)
+    print(paste("We saved:", filename, "(", file.info(filename)$size,
+                "bytes)"))
+    }
+```
+
+## Importing Kallisto results from the subfolder
+
+> [**Important!**]{.underline} No extra subfolders or files should be in the folder *`r folderWithKallistoData`* containing the Kallisto results.
+
+```{r importing reads}
+sampleId <- dir(folderWithKallistoData)
+filenamesKallisto <- file.path(folderWithKallistoData, sampleId,
+                               "abundance.h5")
+names(filenamesKallisto) <- sampleId
+DT::datatable(as.data.frame(filenamesKallisto), caption = "List of files",
+              options = list(pageLength = 100))
+kallistoData <- tximport(filenamesKallisto, type = "kallisto",
+                         tx2gene = rename(Tx2Gen[, c(1, 3)],
+                                          target_id = ensembl_transcript_id,
+                                          ens_gene = ensembl_gene_id),
+                         ignoreTxVersion = T)
+summary(kallistoData$counts)
+print(paste(length(filenamesKallisto), "files loaded from the *",
+            folderWithKallistoData , "* folder and",
+            format(object.size(kallistoData), units = "auto"),
+            "memory was occupied."))
+
+# Combining IDs from Kallisto and ENSEMBL
+geneExpression <- DGEList(kallistoData$counts)
+geneId <- as.data.frame(rownames(geneExpression))
+names(geneId) <- "GeneId"
+geneExpression$genes <- merge(geneId, distinct(Tx2Gen[, c(3:7)],
+                                               ensembl_gene_id,
+                                               .keep_all = T),
+                              by.x = "GeneId",
+                              by.y = "ensembl_gene_id", all.x = T)
+```
+
+## Attaching the table with metadata
+
+Adding factors from the *`r descriptionFile`* file. **First column** should contain the sample names, **the second one** is for group allocation, the other columns should represent factors from the study. It is important to have samples arranged in the same order (alphabetically) as folders coming with the Kallisto results.
+
+> [**Important!**]{.underline} Please check carefully if everything is correct with the imported sample names and factors:
+>
+> -   **id** vs. **group** allocation
+>
+> -   **id** column vs. the first column (**row names**)
+
+```{r metadata}
+samples <- read.delim(descriptionFile, sep = ",", stringsAsFactors = F) %>%
+  clean_names()
+stopifnot("Samples order in RunTable.txt isn't the same as in the folder with the Kallisto results" =
+            rownames(geneExpression$samples) == samples[1])
+geneExpression$samples <- cbind(geneExpression$samples[, -1], samples)
+DT::datatable(as.data.frame(geneExpression$samples),
+  caption = "Samples Metadata", options = list(pageLength = 100))
+```
+
+## Cleaning the dataset
+
+```{r Cleaning the dataset}
+# selecting only the samples we need
+#geneExpression <- geneExpression[, geneExpression$samples$time == "72h"]
+#geneExpression <- geneExpression[, geneExpression$samples$cell == "zap"]
+#geneExpression <- geneExpression[, geneExpression$samples$infection == "mock"]
+#geneExpression <- geneExpression[, geneExpression$samples$lib.size > 1e5]
+
+# Transformation to CPM and deleting low CPM genes
+print(paste(dim(geneExpression)[1],
+            "genes in total were identified by Kallisto"))
+plotCurves <- function(geneExpression, titleString){
+  copiesPerMillion <- cpm(geneExpression, log = T)
+  nsamples <- ncol(copiesPerMillion)
+  color <- brewer.pal(nsamples, "Paired")
+  plot(density(copiesPerMillion[ , 1]), col = color[1], lwd = 2,
+       xlim = c(-5, 10), main = titleString, xlab = "CPM, log2")
+  abline(v = log2(1), lty = 3)
+  for (i in 2:nsamples){
+    lines(density(copiesPerMillion[, i])$x,
+          density(copiesPerMillion[, i])$y,
+          col = color[i], lwd = 2)
+  }
+  legend("topright", rownames(geneExpression$samples), text.col=color,
+         bty="n", cex = 0.5, text.font = 2)
+}
+par(mfrow=c(1,2))
+plotCurves(geneExpression, "CPM before filtration")
+geneExpression <- geneExpression[filterByExpr(geneExpression),,
+                                 keep.lib.sizes = F]
+print(paste(dim(geneExpression)[1], "genes with CPM values valid for statistical analysis (non-zero levels)"))
+
+plotCurves(geneExpression, "CPM after filtration")
+
+# Saving the full dataset
+write.csv(geneExpression, file = paste("GeneExpression",
+                                       gsub(":", "-", Sys.time()),".csv"))
+```
+
+## Normalization to the middle line
+
+```{r normalization}
+# printing data on selected samples
+barplot(height = geneExpression$samples$lib.size /10^6,
+        names = rownames(geneExpression$samples),
+        main = "Library size, x10^6 reads",
+        col = brewer.pal(dim(geneExpression$samples)[1], "Set3"))
+
+# Normalization
+geneExpression <- calcNormFactors(geneExpression, method = "TMM")
+plot(geneExpression$samples$norm.factors * 100,
+     main = "Normalization of CPM",
+     xlab = "Sample, #", ylab = "%")
+abline(h = 100)
+
+# Saving the full dataset
+write.csv(geneExpression, file = paste("GeneExpression normalized",
+                                       gsub(":", "-", Sys.time()),".csv"))
+```
+
+## Unsupervised PCA
+
+```{r PCA1}
+factorsList <- colnames(geneExpression$samples)[-1:-2]
+print(paste("Following factors were identified:", factorsList))
+lcpm <- cpm(geneExpression, log = TRUE)
+par(mfrow = c(3, 3))
+for(i in 1:dim(geneExpression$samples)[1]){
+  plotMD(lcpm, column = i)
+  abline(h = 0, col = "red", lty = 2, lwd = 2)
+}
+par(mfrow = c(1, 1))
+for(i in 1:length(factorsList)){
+  group <- (geneExpression$samples[factorsList[i]])[, 1] %>% as.factor()
+  col.group <- as.factor(group)
+  if (nlevels(col.group) == 2)
+      levels(col.group) <- brewer.pal(3, "Set1")[1:2]
+      else levels(col.group) <- brewer.pal(nlevels(col.group), "Paired")
+  col.group <- as.character(col.group)
+  plotMDS(lcpm, labels = group, col = col.group)
+  title(main = paste("Factor:", factorsList[i]))
+}
+```
+
+# DEG analysis
+
+## Model for DEG calculations
+
+```{r model, echo=TRUE}
+# Start of the model
+
+modelDesign <- model.matrix(~group, data = geneExpression$samples)
+expressionValues <- voom(geneExpression, modelDesign, plot = T)
+modelFit <- lmFit(expressionValues, modelDesign) %>% eBayes
+result <- topTable(modelFit, number = Inf, sort.by = "logFC")
+
+#End of the model
+```
+
+## DEG calculations results
+
+For volcano plots Top10 genes are named. Grey dashed line: threshold for non-adjusted p-value of 0.05. Blue and red lines: thresholds for -1 and +1 log2FC.")
+
+```{r DEG calculations results}
+print(modelDesign)
+plotSA(modelFit, main = "Final model: Mean−variance trend")
+plotBCV(estimateDisp(geneExpression, modelDesign))
+summary(decideTests(modelFit))
+for(i in 2:length(colnames(modelDesign))){
+  plotMD(modelFit, status = rownames(expressionValues$genes) %in% result$GeneId, coef = i)
+  abline(h = c(-1, 1), col = "blue")
+  volcanoplot(modelFit, coef = i, names = geneExpression$genes$external_gene_name,
+              highlight = 10, xlab = "log2FC", ylab = NULL)
+  title(main = colnames(modelDesign)[i])
+  abline(h = -log10(0.05), col = "grey", lwd = 2, lty = "dashed")
+  abline(v = -1, col = "blue", lwd = 1)
+  abline(v = 1, col = "red", lwd = 1)
+  }
+
+## Saving raw data
+stopifnot("GeneID error" = rownames(result) == result$GeneId)
+rownames(result) <- NULL
+result <- result[order(result$adj.P.Val), ]
+DT::datatable(as.data.frame(result),
+  caption = "DEG", options = list(pageLength = 10))
+write.csv(result, file = paste("DEG", gsub(":", "-", Sys.time()),".csv"))
+```
+
+## Supervised PCA
+
+```{r PCA plots}
+PCA <- expressionValues$E %>% t() %>% prcomp()
+for(i in 1:length(factorsList)){
+  group <- expressionValues$targets %>% .[factorsList[i]] %>% .[, 1] %>% t
+  col.group <- as.factor(group)
+  if (nlevels(col.group) == 2)
+      levels(col.group) <- brewer.pal(3, "Set1")[1:2]
+      else levels(col.group) <- brewer.pal(nlevels(col.group), "Paired")
+  col.group <- as.character(col.group)
+  plot(PCA$x[, 1:2], cex = 2, pch = 20, col = col.group)
+  abline(h = 0, v = 0)
+  text(PCA$x, labels = expressionValues$targets %>% .[factorsList[i]] %>%
+         .[, 1] %>% t, pos = 4)
+  title(main = paste("Factor:", factorsList[i]))
+}
+DT::datatable(as.data.frame(PCA$x[, 1:3]), options = list(pageLength = 10),
+              caption = paste("Raw values for PCA analysis, sample"))
+barplot(summary(PCA)$importance[2, ][1:10], main = "Weight of PCs, %")
+```
+
+# GO analysis
+
+## Reporting GOs
+
+```{r GO}
+if(proceedToGO){
+  # Loading Gene Sets and making Index
+  geneSet <- read_delim(GMTFileName, "\t", escape_double = FALSE,
+                        col_names = FALSE, trim_ws = TRUE,
+                        show_col_types = F) %>% t
+  colnames(geneSet) <- geneSet[1, ] %>% toupper()
+  geneSet <- geneSet[-c(1:2), ] %>% as.data.frame
+  geneIndex <- lapply(geneSet, unlist)
+  geneIndex <- lapply(geneIndex, function(x) x[!is.na(x)])
+
+  # Counting Genes
+  countedGene <- ids2indices(geneIndex,
+                             id = expressionValues$genes$external_gene_name)
+
+  # Model
+  groupFactor <- expressionValues$targets$group %>% as.factor
+  GOModelDesign <- model.matrix(~0 + groupFactor)
+  colnames(GOModelDesign) <- c("Negative", "Positive")
+  print(GOModelDesign)
+  GOcontrastsMatrix <- makeContrasts(
+    TreatmentEffect = Positive - Negative,
+    levels = colnames(GOModelDesign)
+  )
+  print(GOcontrastsMatrix)
+  result <- camera(expressionValues, countedGene, GOModelDesign,
+                     contrast = GOcontrastsMatrix, sort = T)
+
+  # reporting
+  print(paste("GO pathways analyzed:", dim(result)[1]))
+  print(paste("Affected GO pathways (Up + Down for FDR <",
+              FDRLimit, "):", result[result$Direction == "Up" &
+                                       result$FDR < FDRLimit, ] %>%
+                count %>% as.integer, "+",
+              result[result$Direction == "Down" &
+                       result$FDR < FDRLimit, ] %>% count %>% as.integer))
+  result <- result[order(result$PValue), ] %>% as.data.frame
+
+  # saving GO results
+  write.csv(result, file = paste("GO", gsub(":", "-", Sys.time()),".csv"))
+
+  # saving GO results for Cytoscape in G:Profiler file format
+  GProfilerFormatResult <- cbind(result %>% rownames,
+             result %>% rownames %>% str_replace_all("_", " ") %>%
+               str_to_lower, result[c(3, 4, 2)])
+  row.names(GProfilerFormatResult) <- NULL
+  colnames(GProfilerFormatResult) <- c("GO.ID", "Description", "p.Val",
+                                       "FDR", "Phenotype")
+  geneListGProfiler <- geneIndex %>% lapply(function(x) x %>% unlist %>%
+                                              paste(collapse = ",")) %>%
+    stack
+  colnames(geneListGProfiler) <- c("Genes", "GO.ID")
+  GProfilerFormatResult <- left_join(GProfilerFormatResult,
+                                     geneListGProfiler)
+  write_delim(GProfilerFormatResult, paste("GO for Cytoscape",
+                    gsub(":", "-", Sys.time()),".txt"), delim = "\t")
+} else {
+  print("GO analysis was skipped")
+  result <- data.frame(Direction = NA, FDR = NA)
+  }
+
+DT::datatable(result[result$Direction == "Up" &
+                       result$FDR < FDRLimit, ],
+              options = list(pageLength = 10),
+              caption = paste("Upregulated GOs at FDR <", FDRLimit))
+DT::datatable(result[result$Direction == "Down" &
+                       result$FDR < FDRLimit, ],
+              options = list(pageLength = 10),
+              caption = paste("Downregulated GOs at FDR <", FDRLimit))
+```
+
+## Making a barcode and heatmap for the selected GO pathway
+
+```{r barcodes}
+if(proceedToGO){
+  # barcode and heatmap for GeneSet of Interest
+  geneList <- countedGene[[`geneSetOfInterest`]]
+  barcodeplot(modelFit$t[, 2],
+    index = geneList,
+    main = paste(geneSetOfInterest)
+  )
+  pheatmap(expressionValues$E[geneList, ],
+    scale = "row",
+    labels_row = expressionValues$genes$external_gene_name[geneList],
+    annotation_col = as.data.frame(expressionValues$targets[ , -1:-3]))
+} else print("GO analysis was skipped")
+```
+
+# R session info and references
+
+-   Template based on [Rmarkdown](https://bookdown.org/yihui/rmarkdown/), using the [united HTML theme](https://bootswatch.com/united/).
+-   Script was created by Ivan Trus ([Github profile](https://github.com/itrus)) on 2023-02-12.
+-   **Execution start time:** *`r StartTime`*
+-   **Execution end time :** *`r Sys.time()`*
+
+```{r session info, comment=""}
+xfun::session_info()
+```
