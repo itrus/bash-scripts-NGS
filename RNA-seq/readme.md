@@ -143,33 +143,30 @@ In this experiment, we use the pig (_Sus scrofa_) reference genome. Download the
 
 ## 6 ANALYSIS IN R
 Analysis in R is broken into two parts:
-The first R script (RNA-seq-initial.Rmd) downloads gene names from the reference Ensembl genome, in this experiment from Sus Scrofa reference genome, and connects them to our experimental RNA-seq transcripts that were quantified by Kallisto at step 5.1, and generates the output file with all Gene expression data (**GE.Rdata**).
-The second script (RNA-seq-final.Rmd) doesn’t need any connection to the Internet. It takes results of the first script (**GE.Rdata**) and analysis experimental RNA-seq data using the provided model that can be modified (e.g., comparing gene expression between Control and ZIKV-infected groups; include fetal sex as a factor into analysis, etc.).
-### 6.1 The first R script is preparing data for analysis
-This script (RNA-Seq-initial.Rmd) creates database of reference genes and links it to the experimental RNA-seq transcripts.
+The R script (RNA-seql.Rmd) downloads gene names from the reference Ensembl genome, in this experiment from Sus Scrofa reference genome, and connects them to our experimental RNA-seq transcripts that were quantified by Kallisto at step 5.1, and generates the output file with all Gene expression data (**GE.Rdata**).
+Then the script (RNA-seq.Rmd) doesn’t need any connection to the Internet. It takes results of the first part (**GE.Rdata**) and analysis experimental RNA-seq data using the provided model that can be modified (e.g., comparing gene expression between Control and ZIKV-infected groups; include fetal sex as a factor into analysis, etc.).
+### 6.1 The first part of the R script is preparing data for analysis
+This script (RNA-Seq.Rmd) creates database of reference genes and links it to the experimental RNA-seq transcripts.
 **This is an important step!** Get the correct reference: the same animal and the same version and the same breed (e.g. Sus scrofa 11.1). The database of genes and their respective transcripts should be created once (file named **Tx2Gen.Rdata**) and loaded later if necessary. Because it should be the same version as one used for Kallisto above (step 5.1).
 The current script is searching for the most recent porcine genome (parameter _SearchString <- "sscrofa"_). Adjust it if necessary (e.g. for human genome it should be  _SearchString <- "GRCh38.p13"_). Check the output of the R script to see if it was working as expected.
-Then RNA-Seq-initial.Rmd script loads all experimental Kallisto results and aligns experimental RNA-seq transcripts to the reference genome database. To make sure that identification of experimental RNA-seq transcripts and identification of genes in the reference dataset do match, you may go to the ENSEMBL website (http://uswest.ensembl.org/Sus_scrofa/Info/Index?db=core). Find 2-3 transcripts manually (copy-paste ID of the transcript), search and check if correct gene names were assigned properly.
+Then RNA-Seq.Rmd script loads all experimental Kallisto results and aligns experimental RNA-seq transcripts to the reference genome database. To make sure that identification of experimental RNA-seq transcripts and identification of genes in the reference dataset do match, you may go to the ENSEMBL website (http://uswest.ensembl.org/Sus_scrofa/Info/Index?db=core). Find 2-3 transcripts manually (copy-paste ID of the transcript), search and check if correct gene names were assigned properly.
 Then script converts absolute counts/reads to relative counts-per-million reads (CPM) and cleans the dataset. For cleaning we keep Genes only with non-zero CPM levels in each subgroup as previosly described (https://doi.org/10.12688/f1000research.9005.3).
 1. Place to a separate (new) directory
-   - the first R script (RNA-Seq-initial.Rmd)
+   - the R script (RNA-Seq.Rmd)
    - folder containing subfolders with transcript counts for each sample (“./kallisto”) (./ - means working directory; the actual folder name is – **kallisto**). It is important to have no extra files added by user to this folder; the workflow fails often in such cases.
    - file with Metadata for the whole trial (RunTable.txt)
+   - file with GO pathways for Biological Processes (c5.bp.v7.2.symbols.gmt; the name can be different because it can be updated). This is an universal file downloaded from the GSEA website (https://www.gsea-msigdb.org/gsea/msigdb/collections.jsp). Go to the chapter **C5** standing for GO, then to **BP** subchapter standing for Biological Processes and download the GMT file containing Gene Symbols. 
 2. Open and run the R script with R-Studio.
    - Use **Code > Run Region > Run All** (Control+Alt+R) if you want to see results in R-Studio.
    - Use **File > Knit Document** if you need a report file to be generated.
 3. Script creates three new files:
-   - RNA-Seq-initial.html – HTML report;
+   - RNA-Seq.html – HTML report;
    - Tx2Gen.Rdata – the database of reference genes and link to their corresponding transcripts;
    - GE.Rdata contains all the data on Gene Expression and sample arrangement to groups (Factors; e.g, Control or ZIKV, etc.). This file will be an input for the next script.
 
-### 6.2 The second R script makes the analysis
-While the previous R script needs only one parameter to be adjusted (the reference genome), the second script has multiple parameters to consider.
-1. Place to a separate (new) directory
-   - the R script (RNA-Seq-final.Rmd)
-   - the output from the previous script (GE.Rdata)
-   - file with GO pathways for Biological Processes (c5.bp.v7.2.symbols.gmt; the name can be different because it can be updated). This is an universal file downloaded from the GSEA website (https://www.gsea-msigdb.org/gsea/msigdb/collections.jsp). Go to the chapter **C5** standing for GO, then to **BP** subchapter standing for Biological Processes and download the GMT file containing Gene Symbols. 
-2. Adjust the R script as needed. Important points are given below. For factor names and possible values, please refer to the report from the previous/initial R script.
+### 6.2 The second part of the R script makes the analysis
+While the previous part of the R script needs only one parameter to be adjusted (the reference genome), the second script has multiple parameters to consider.
+1. Adjust the R script as needed. Important points are given below. For factor names and possible values, please refer to the report from the previous/initial R script.
    - Load the input file: _GeneExpression <- readRDS("GE.Rdata")_
    - Load the GMT file: _GMTFileName <- "c5.bp.v7.2.symbols.gmt"_ (use correct name if the file was updated)
    - Setting up the GO analysis. Alternatively you can do GO analysis online using the Enrichr (https://maayanlab.cloud/Enrichr/)
@@ -226,10 +223,7 @@ Notes:
 - Try to keep models as simple as possible.
 - GO analysis is more sensitive then DEG analysis. You can use more conservative model for GO analysis, even if it gives almost no results for DEGs.
 
-3. Open and run the R script with R-Studio.
-   - Use **Code > Run Region > Run All** (Control+Alt+R) if you want to see results in R-Studio.
-   - Use **File > Knit Document** if you need a report file to be generated.
-4. As a result, several files are created
+2. Upon running the final part of the script, several files are created
    - HTML report is created
      - Initial and adjusted PCA charts are included in this report. Raw data for latter one is also in the report.
      - Adjusted gene-expression values (after solving the model) are stored in GE.csv. This file can be used to identify sex in your samples, if necessary. E.g. Teixeira et al. (https://doi.org/10.3390/genes10121010) identified DEGs in porcine fetuses bsed on their sex: DDX3Y, KDM5D, ZFY, EIF2S3Y, EIF1AY. Find them in Excel-file. These genes are expressed well only in males.
