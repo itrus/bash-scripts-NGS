@@ -3,7 +3,6 @@
 ```
 for i in *.fastq; do pyFastqDuplicateRemover.py -f $i -o collapsed_$i; done
 ```
-
 ## Creating MD5 sum for each file in the directory
 ```
 find -type f -exec md5sum "{}" +
@@ -26,11 +25,16 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
 }
 ```
 ## Converting all BAM files to SAM files
-
 ```
 parallel --plus 'samtools view -h {} -o {...}.sam' ::: *.bam
 ```
-
+## Converting all BAM files to BAM files with either negative or positive strand reads
+```
+#!/bin/bash
+mkdir pos-neg
+find ./ -maxdepth 1 -iname '*.bam' | parallel -j 4 --progress 'samtools view -b -F 4 -F 2048 -F 16 {} -o ./pos-neg/{.}_pos.bam | echo {/}'
+find ./ -maxdepth 1 -iname '*.bam' | parallel -j 4 --progress 'samtools view -b -F 4 -F 2048 -f 16 {} -o ./pos-neg/{.}_neg.bam | echo {/}'
+```
 # Cleaning the Linux environment
 - The following script will delete rubbish from the system. Use it with caution.
 - Run it as a root.
