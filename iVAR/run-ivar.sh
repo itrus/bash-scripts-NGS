@@ -67,6 +67,7 @@ for ((i=0; i<$TOTAL_FILES; i+=1)) {
     ivar removereads -i $FILE_NAME.trimmed.sorted.bam -p $FILE_NAME.trimmed.sorted.masked.bam -t $SAMPLE_NAME.mismatches.txt -b primers.bed
     echo "[sorting resulting BAM] samtools sort $FILE_NAME.trimmed.sorted.masked.bam -o $FILE_NAME.trimmed.sorted.masked.sorted.bam"
     samtools sort $FILE_NAME.trimmed.sorted.masked.bam -o $FILE_NAME.trimmed.sorted.masked.sorted.bam
+    samtools index $FILE_NAME.trimmed.sorted.masked.sorted.bam
     echo "[generating final TSV file] samtools mpileup -A -d 1000000 --reference $REFERENCE -B -Q 0 $FILE_NAME.trimmed.sorted.masked.sorted.bam | ivar variants -p $FILE_NAME.SNV -t $THRESHOLD -r $REFERENCE -g GFF_FILE"
     samtools mpileup -A -d 1000000 --reference $REFERENCE -B -Q 0 $FILE_NAME.trimmed.sorted.masked.sorted.bam | ivar variants -p $FILE_NAME.SNV -t $THRESHOLD -r $REFERENCE -g $GFF_FILE
 }
