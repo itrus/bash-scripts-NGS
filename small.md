@@ -40,56 +40,74 @@ find ./ -maxdepth 1 -iname '*.bam' | parallel -j 4 --progress 'samtools view -b 
 - Run it as a root.
 
 ```
-#!/bin/sh
+#!/usr/bin/env bash
+# deb12-system-cleanup.sh – safe monthly housekeeping for Debian 12
+# version 2025-07-01
+set -euo pipefail
+IFS=$'\n\t'
 
-# Packages updating
-sudo apt update
-sudo apt-get upgrade
+log() { printf '[%s] %s\n' "$(date +'%F %T')" "$1"; }
+free_before=$(df --output=avail -B1M / | awk 'NR==2{print $1}')
 
-# Deleting partial packages
-apt-get clean && apt-get autoclean
-apt-get remove --purge -y software-properties-common
+log 'APT update / full-upgrade …'
+sudo apt-get update -y
+sudo apt-get full-upgrade -y # pulls kernel meta-pkgs
+sudo snap refresh
 
-# Removing no longer required packages
-apt-get autoremove -y
+log 'Removing packages no longer required …'
+sudo apt-get autoremove --purge -y                # prunes superseded kernels too
+sudo apt-get autoclean -y && sudo apt-get clean
 
-# Removing orphaned packages
-deborphan | xargs sudo apt-get -y remove --purge
+log 'Purging orphaned libraries …'
+if command -v deborphan >/dev/null 2>&1; then
+    deborphan --guess-all -z | xargs -0 -r sudo apt-get purge -y
+fi
 
-# Deleting old kernels
+log 'deleting old kernels'
 sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
 echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
 sudo dpkg --list | egrep -i --color 'linux-image|linux-headers'
 
-# Cleaning /tmp
-find /tmp -type f -atime +2 -mtime +2  | xargs  /bin/rm -f &&
-find /tmp -type d -mtime +2 -exec /bin/rm -rf '{}' \; &&
-find /tmp -type l -ctime +2 | xargs /bin/rm -f &&
-find -L /tmp -mtime +2 -print -exec rm -f {} \;
+log '/tmp: deleting items older than 3 d …'
+sudo find /tmp -xdev -mindepth 1 -mtime +3 -print0 | sudo xargs -0 -r rm -rf --
 
-# Cleaning Chromium browser cache
-rm -r ~/.cache/chromium
-rm -r ~/.config/chromium/Default/File\ System
+log 'Docker: pruning unused layers / volumes …'
+if command -v docker >/dev/null 2>&1; then
+    sudo docker system prune -af --volumes        # typically 600 MB–3 GB
+fi
 
-# Cleaning Chrome browser cache
-rm -r /home/*/.cache/google-chrome/
+log 'Flatpak: removing old revisions …'
+if command -v flatpak >/dev/null 2>&1; then
+    sudo flatpak uninstall --unused -y
+fi
 
-# Cleaning images thumbnails
-rm -r /home/*/.cache/thumbnails
+log 'Cleaning Chrome browser cache'
+rm -r ~/.cache/google-chrome/
 
-# Cleaning the Trash
-rm -rf /home/*/.local/share/Trash/*/**
-rm -rf /root/.local/share/Trash/*/**
-
-# Cleaning old snap versions
+log 'Cleaning old snap versions'
 snap list --all | while read snapname ver rev trk pub notes; do if [[ $notes = *disabled* ]]; then sudo snap remove "$snapname" --revision="$rev"; fi; done
 
-# Clean all the log file. Delete all .gz and rotated file
-find /var/log -type f -regex ".*\.gz$" | xargs rm -Rf
-find /var/log -type f -regex ".*\.[0-9]$" | xargs rm -Rf
-journalctl --vacuum-time=10d
+log 'Vacuuming system journal → 14 d / 300 MB …'
+sudo journalctl --vacuum-time=14d --vacuum-size=300M
 
-echo "Cleaning is completed" 
+log 'Deleting stale crash dumps & coredumps …'
+sudo rm -rf /var/crash/*.crash /var/lib/systemd/coredump/* || true
+
+log 'Clearing language-package caches …'
+for d in ~/.cache/pip ~/.cache/pipenv ~/.cache/composer ~/.npm ~/.cache/_cacache; do
+    [ -d "$d" ] && rm -rf "$d"
+done
+
+log 'Removing user thumbnails & trash …'
+if [ -n "${SUDO_USER-}" ]; then
+    sudo -u "$SUDO_USER" bash -c 'rm -rf ~/.cache/thumbnails/* ~/.local/share/Trash/{files,info}/*'
+fi
+
+free_after=$(df --output=avail -B1M / | awk 'NR==2{print $1}')
+freed=$(( free_after - free_before ))        # MiB
+log "Freed ${freed} MiB"
+
+log 'Cleanup completed.'
 ```
 
 ## Writing console output to log file
