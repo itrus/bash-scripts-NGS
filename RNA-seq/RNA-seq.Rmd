@@ -22,7 +22,7 @@ link-citations: true
 
 ```{r Initialization}
 # setting up parameters for BioMart import
-currentBioMart <- "ChlSab1.1"
+currentBioMart <- "Sscrofa11.1"
 filename <- paste0("BioMart-",currentBioMart,".Rdata")
 
 # setting up parameters for kallisto import
@@ -30,10 +30,14 @@ folderWithKallistoData <- "kallisto"
 descriptionFile <- "RunTable.txt"
 
 # setting up parameters for GO analyses
-proceedToGO <- TRUE
+proceedToGO <- FALSE
 FDRLimit <- 0.25
-GMTFileName <- "c5.go.bp.v7.5.1.symbols.gmt"
-geneSetOfInterest <- "GOBP_PROTEIN_NEDDYLATION"
+GMTFileName <- data.frame(BP = "sscrofa.GO_BP.name.gmt",
+                          CC = "sscrofa.GO_CC.name.gmt",
+                          MF = "sscrofa.GO_MF.name.gmt",
+                          HP = "sscrofa.HP.name.gmt",
+                          REAC = "sscrofa.REAC.name.gmt")
+geneSetOfInterest <- "antiviral innate immune response	"
 ```
 
 -   Current BioMart is **`r currentBioMart`** saved as **`r filename`** file.
@@ -42,7 +46,6 @@ geneSetOfInterest <- "GOBP_PROTEIN_NEDDYLATION"
 -   GO analysis
     -   FDR is **`r FDRLimit`**
     -   GMT is from the **`r GMTFileName`** file
-    -   GO of interest is **`r geneSetOfInterest`**
 
 ## Loading libraries
 
@@ -61,14 +64,14 @@ StartTime <- Sys.time()
 library(librarian)
 librarian::shelf(magrittr, DT, ggplot2, xfun, dplyr, janitor,
                  readr, RColorBrewer, biomaRt, tximport, edgeR, rhdf5,
-                 pheatmap, stringr, limma,
+                 pheatmap, stringr, limma, GSEABase,
                  quiet = T)
 librarian::check_attached()
 ```
 
 ## Importing BioMart
 
-String "**GRCh38.p13**" corresponds to the current version of BioMart for **human genome**. Searched BioMart: **`r currentBioMart`** The current block creates database of Genes and Transcripts called *`r filename`*. It will be created once and re-loaded from the saved file if re-ruinning the script.
+String "**Sscrofa11.1**" corresponds to the current version of BioMart for **porcine genome**. Searched BioMart: **`r currentBioMart`** The current block creates database of Genes and Transcripts called *`r filename`*. It will be created once and re-loaded from the saved file if re-ruinning the script.
 
 Full list of available BioMart databases is available here:
 
@@ -83,21 +86,24 @@ if(file.exists(filename)){
               "(", file.info(filename)$size, "bytes)"))
   } else {
     print(paste("We are searching for:", currentBioMart))
-    foundBioMart <- searchDatasets(mart = useMart("ensembl"),
-                                   pattern = currentBioMart)
-    stopifnot("Wrong BioMart was found" = foundBioMart[3] == currentBioMart)
-    stopifnot("Number of found BioMarts is not equal one" =
-                dim(foundBioMart[1]) == 1)
-    print(paste("We found:", foundBioMart %>% toString()))
+
+#   listDatasets(ensembl)
+#    listEnsemblArchives()
+
+
+#    ensembl <- useMart(biomart = "ensembl",
+#                       dataset = "sscrofa_gene_ensembl") 
+
+    ensembl <- useMart(biomart = "ensembl",
+                       host = "https://jan2024.archive.ensembl.org",
+                       dataset = "sscrofa_gene_ensembl")   
     Tx2Gen <- getBM(attributes = c("ensembl_transcript_id",
                                    "transcript_version",
                                    "ensembl_gene_id",
                                    "external_gene_name",
                                    "description",
                                    "transcript_biotype",
-                                   "transcript_length"),
-                    mart = (useMart(biomart = "ENSEMBL_MART_ENSEMBL",
-                                  dataset = foundBioMart[1])))
+                                   "transcript_length"), mart = ensembl)
     saveRDS(Tx2Gen, filename)
     print(paste("We saved:", filename, "(", file.info(filename)$size,
                 "bytes)"))
@@ -116,7 +122,7 @@ names(filenamesKallisto) <- sampleId
 DT::datatable(as.data.frame(filenamesKallisto), caption = "List of files",
               options = list(pageLength = 100))
 kallistoData <- tximport(filenamesKallisto, type = "kallisto",
-                         tx2gene = rename(Tx2Gen[, c(1, 3)],
+                         tx2gene = dplyr::rename(Tx2Gen[, c(1, 3)],
                                           target_id = ensembl_transcript_id,
                                           ens_gene = ensembl_gene_id),
                          ignoreTxVersion = T)
@@ -233,11 +239,14 @@ par(mfrow = c(1, 1))
 for(i in 1:length(factorsList)){
   group <- (geneExpression$samples[factorsList[i]])[, 1] %>% as.factor()
   col.group <- as.factor(group)
-  if (nlevels(col.group) == 2)
+  if (nlevels(col.group) == 2){
       levels(col.group) <- brewer.pal(3, "Set1")[1:2]
-      else levels(col.group) <- brewer.pal(nlevels(col.group), "Paired")
-  col.group <- as.character(col.group)
-  plotMDS(lcpm, labels = group, col = col.group)
+      col.group <- as.character(col.group)
+      plotMDS(lcpm, labels = group, col = col.group)
+      }
+      else {
+        plotMDS(lcpm, labels = group, col = brewer.pal(nlevels(col.group), "Paired"))
+        }
   title(main = paste("Factor:", factorsList[i]))
 }
 ```
@@ -293,11 +302,15 @@ PCA <- expressionValues$E %>% t() %>% prcomp()
 for(i in 1:length(factorsList)){
   group <- expressionValues$targets %>% .[factorsList[i]] %>% .[, 1] %>% t
   col.group <- as.factor(group)
-  if (nlevels(col.group) == 2)
+  if (nlevels(col.group) == 2){
       levels(col.group) <- brewer.pal(3, "Set1")[1:2]
-      else levels(col.group) <- brewer.pal(nlevels(col.group), "Paired")
-  col.group <- as.character(col.group)
-  plot(PCA$x[, 1:2], cex = 2, pch = 20, col = col.group)
+      col.group <- as.character(col.group)
+      plot(PCA$x[, 1:2], cex = 2, pch = 20, col = col.group)
+      }
+      else {
+        plot(PCA$x[, 1:2], cex = 2, pch = 20,
+             col = brewer.pal(nlevels(col.group), "Paired"))
+        }
   abline(h = 0, v = 0)
   text(PCA$x, labels = expressionValues$targets %>% .[factorsList[i]] %>%
          .[, 1] %>% t, pos = 4)
@@ -313,33 +326,75 @@ barplot(summary(PCA)$importance[2, ][1:10], main = "Weight of PCs, %")
 ## Reporting GOs
 
 ```{r GO}
-if(proceedToGO){
-  # Loading Gene Sets and making Index
-  geneSet <- read_delim(GMTFileName, "\t", escape_double = FALSE,
-                        col_names = FALSE, trim_ws = TRUE,
-                        show_col_types = F) %>% t
-  colnames(geneSet) <- geneSet[1, ] %>% toupper()
-  geneSet <- geneSet[-c(1:2), ] %>% as.data.frame
-  geneIndex <- lapply(geneSet, unlist)
-  geneIndex <- lapply(geneIndex, function(x) x[!is.na(x)])
+collapse_gmt_duplicates <- function(infile, outfile) {
+  lines <- readLines(infile, warn = FALSE)
+  parts <- strsplit(lines, "\t", fixed = TRUE)
 
-  # Counting Genes
-  countedGene <- ids2indices(geneIndex,
-                             id = expressionValues$genes$external_gene_name)
+  go_id <- vapply(parts, `[`, character(1), 1)
+  desc  <- vapply(parts, function(x) if (length(x) >= 2) x[2] else NA_character_, character(1))
+  genes <- lapply(parts, function(x) if (length(x) >= 3) x[3:length(x)] else character(0))
 
-  # Model
-  groupFactor <- expressionValues$targets$group %>% as.factor
+  # union genes per GO ID
+  gene_union <- tapply(seq_along(genes), go_id, function(ix) unique(unlist(genes[ix], use.names = FALSE)))
+  # keep first description per GO ID (or choose most frequent if you prefer)
+  desc_first <- tapply(desc, go_id, function(x) x[which(!is.na(x))[1]])
+
+  out_lines <- mapply(function(id, d, g) {
+    paste(c(id, d, g), collapse = "\t")
+  }, names(gene_union), desc_first[names(gene_union)], gene_union, USE.NAMES = FALSE)
+
+  writeLines(out_lines, outfile, useBytes = TRUE)
+  outfile
+}
+
+runGO <- function(CurrentGMTFileName, shortCutName){
+  
+  gmt_clean <- collapse_gmt_duplicates(CurrentGMTFileName, tempfile(fileext = ".gmt"))
+  gmt_s4 <- GSEABase::getGmt(gmt_clean)
+  geneIndex <- GSEABase::geneIds(gmt_s4)
+  
+  go_lookup <- data.frame(
+    GO.ID = names(geneIndex),
+    Description = sapply(gmt_s4, function(x) x@shortDescription),
+    stringsAsFactors = FALSE
+  )
+  
+  # Counting genes
+  countedGene <- ids2indices(
+    geneIndex,
+    id = expressionValues$genes$external_gene_name
+  )
+  
+  # Model (unchanged)
+  groupFactor <- as.factor(expressionValues$targets$group)
   GOModelDesign <- model.matrix(~0 + groupFactor)
   colnames(GOModelDesign) <- c("Negative", "Positive")
-  print(GOModelDesign)
+
   GOcontrastsMatrix <- makeContrasts(
     TreatmentEffect = Positive - Negative,
     levels = colnames(GOModelDesign)
   )
   print(GOcontrastsMatrix)
-  result <- camera(expressionValues, countedGene, GOModelDesign,
-                     contrast = GOcontrastsMatrix, sort = T)
 
+  result <- camera(
+    expressionValues,
+    countedGene,
+    GOModelDesign,
+    contrast = GOcontrastsMatrix,
+    sort = TRUE
+  )
+
+  result$GO.ID <- rownames(result)
+
+  result <- merge(result, go_lookup,
+                by = "GO.ID",
+                all.x = TRUE,
+                sort = FALSE)
+
+  result <- result[, c("GO.ID", "Description",
+                     "NGenes", "Direction",
+                     "PValue", "FDR")]
+  
   # reporting
   print(paste("GO pathways analyzed:", dim(result)[1]))
   print(paste("Affected GO pathways (Up + Down for FDR <",
@@ -351,36 +406,39 @@ if(proceedToGO){
   result <- result[order(result$PValue), ] %>% as.data.frame
 
   # saving GO results
-  write.csv(result, file = paste("GO", gsub(":", "-", Sys.time()),".csv"))
+  write.csv(result, file = paste("GO", shortCutName,
+                                 gsub(":", "-", Sys.time()),".csv"))
 
   # saving GO results for Cytoscape in G:Profiler file format
-  GProfilerFormatResult <- cbind(result %>% rownames,
-             result %>% rownames %>% str_replace_all("_", " ") %>%
-               str_to_lower, result[c(3, 4, 2)])
-  row.names(GProfilerFormatResult) <- NULL
-  colnames(GProfilerFormatResult) <- c("GO.ID", "Description", "p.Val",
-                                       "FDR", "Phenotype")
-  geneListGProfiler <- geneIndex %>% lapply(function(x) x %>% unlist %>%
-                                              paste(collapse = ",")) %>%
-    stack
-  colnames(geneListGProfiler) <- c("Genes", "GO.ID")
-  GProfilerFormatResult <- left_join(GProfilerFormatResult,
-                                     geneListGProfiler)
-  write_delim(GProfilerFormatResult, paste("GO for Cytoscape",
-                    gsub(":", "-", Sys.time()),".txt"), delim = "\t")
-} else {
-  print("GO analysis was skipped")
-  result <- data.frame(Direction = NA, FDR = NA)
-  }
+  # GProfilerFormatResult <- cbind(result %>% rownames,
+  #            result %>% rownames %>% str_replace_all("_", " ") %>%
+  #              str_to_lower, result[c(3, 4, 2)])
+  # row.names(GProfilerFormatResult) <- NULL
+  # colnames(GProfilerFormatResult) <- c("GO.ID", "Description", "p.Val",
+  #                                      "FDR", "Phenotype")
+  # geneListGProfiler <- geneIndex %>% lapply(function(x) x %>% unlist %>%
+  #                                             paste(collapse = ",")) %>%
+  #   stack
+  # colnames(geneListGProfiler) <- c("Genes", "GO.ID")
+  # GProfilerFormatResult <- left_join(GProfilerFormatResult,
+  #                                    geneListGProfiler)
+  # write_delim(GProfilerFormatResult, paste("GO for Cytoscape", shortCutName,
+  #                   gsub(":", "-", Sys.time()),".txt"), delim = "\t")
+  return(result)
+}
 
-DT::datatable(result[result$Direction == "Up" &
-                       result$FDR < FDRLimit, ],
-              options = list(pageLength = 10),
-              caption = paste("Upregulated GOs at FDR <", FDRLimit))
-DT::datatable(result[result$Direction == "Down" &
-                       result$FDR < FDRLimit, ],
-              options = list(pageLength = 10),
-              caption = paste("Downregulated GOs at FDR <", FDRLimit))
+for(i in 1:dim(GMTFileName)[2]){
+  print(paste("Running GO analysis for GMT file:", colnames(GMTFileName[i])))
+  result <- runGO(GMTFileName[ , i], colnames(GMTFileName[i]))
+  DT::datatable(result[result$Direction == "Up" &
+                         result$FDR < FDRLimit, ],
+                options = list(pageLength = 10),
+                caption = paste("Upregulated GOs at FDR <", FDRLimit))
+  DT::datatable(result[result$Direction == "Down" &
+                         result$FDR < FDRLimit, ],
+                options = list(pageLength = 10),
+                caption = paste("Downregulated GOs at FDR <", FDRLimit))
+  }
 ```
 
 ## Making a barcode and heatmap for the selected GO pathway
@@ -410,3 +468,4 @@ if(proceedToGO){
 ```{r session info, comment=""}
 xfun::session_info()
 ```
+
